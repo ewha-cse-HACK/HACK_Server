@@ -150,7 +150,7 @@ hs_err_pid*
 replay_pid*
 
 ### Gradle ###
-settings.gradle
+.gradle
 **/build/
 !src/**/build/
 
