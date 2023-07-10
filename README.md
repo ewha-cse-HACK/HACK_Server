@@ -10,7 +10,7 @@
 <h3>Install</h3>
 
 ~~~
-git clone https://github.com/ewha-cse-HACK/server_dev.git
+git clone https://github.com/ewha-cse-HACK/HACK_Server.git
 ~~~
 
 <h3>API</h3>
