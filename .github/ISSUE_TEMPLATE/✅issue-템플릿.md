@@ -1,6 +1,6 @@
 ---
 name: "✅Issue 템플릿"
-about: task 등록
+about: "[Action]task 등록"
 title: ''
 labels: ''
 assignees: ''
