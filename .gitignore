@@ -7,6 +7,9 @@
 
 *.DS_Store
 
+#ChatGPT api Config file
+src/main/java/com/hack/hack_server/ChatGptConfig.java
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
