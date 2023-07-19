@@ -32,9 +32,17 @@ public class ChatGptService {
     }
 
     public ChatGptResponseDto askQuestion(QuestionRequestDto requestDto) {
-        MessageRequestDto messageRequestDto = new MessageRequestDto(ChatGptConfig.ROLE, requestDto.getQuestion(), "sister");
         List<MessageRequestDto> messages = new ArrayList<>();
-        messages.add(messageRequestDto);
+        messages.add(MessageRequestDto.builder()
+                        .role(ChatGptConfig.ROLE)
+                        .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master.")
+                        .name("sister")
+                        .build());
+        messages.add(MessageRequestDto.builder()
+                        .role(ChatGptConfig.ROLE)
+                        .content(requestDto.getQuestion())
+                        .name("sister")
+                        .build());
 
         return this.getResponse(
                 this.buildHttpEntity(
