@@ -34,12 +34,12 @@ public class ChatGptService {
     public ChatGptResponseDto askQuestion(QuestionRequestDto requestDto) {
         List<MessageRequestDto> messages = new ArrayList<>();
         messages.add(MessageRequestDto.builder()
-                        .role(ChatGptConfig.ROLE)
+                        .role(ChatGptConfig.SYSTEM_ROLE)
                         .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master.")
                         .name("sister")
                         .build());
         messages.add(MessageRequestDto.builder()
-                        .role(ChatGptConfig.ROLE)
+                        .role(ChatGptConfig.USER_ROLE)
                         .content(requestDto.getQuestion())
                         .name("sister")
                         .build());
