@@ -1,5 +1,8 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Controller;
 
+import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
+import com.hack.hack_server.ChatGpt.Service.ChatGptService;
+import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

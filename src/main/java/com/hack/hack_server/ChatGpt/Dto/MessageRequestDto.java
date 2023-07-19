@@ -1,4 +1,4 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Dto;
 
 import lombok.Builder;
 import lombok.Getter;

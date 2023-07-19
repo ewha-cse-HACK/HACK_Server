@@ -1,5 +1,10 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Service;
 
+import com.hack.hack_server.ChatGpt.Dto.MessageRequestDto;
+import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
+import com.hack.hack_server.ChatGptConfig;
+import com.hack.hack_server.ChatGpt.Dto.ChatGptRequestDto;
+import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -27,7 +32,6 @@ public class ChatGptService {
                 ChatGptConfig.URL,
                 chatGptRequestDtoHttpEntity,
                 ChatGptResponseDto.class);
-
         return responseEntity.getBody();
     }
 
@@ -35,7 +39,7 @@ public class ChatGptService {
         List<MessageRequestDto> messages = new ArrayList<>();
         messages.add(MessageRequestDto.builder()
                         .role(ChatGptConfig.SYSTEM_ROLE)
-                        .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master.")
+                        .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master. Use informal language")
                         .name("sister")
                         .build());
         messages.add(MessageRequestDto.builder()
