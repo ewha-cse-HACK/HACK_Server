@@ -1,9 +1,9 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hack.hack_server.ChatGpt.Dto.MessageRequestDto;
 import lombok.*;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter

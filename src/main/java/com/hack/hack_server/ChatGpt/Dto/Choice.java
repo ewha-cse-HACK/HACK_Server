@@ -1,10 +1,10 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hack.hack_server.ChatGpt.Dto.MessageResponseDto;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor

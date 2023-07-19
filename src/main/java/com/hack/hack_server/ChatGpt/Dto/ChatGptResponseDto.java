@@ -1,5 +1,6 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt.Dto;
 
+import com.hack.hack_server.ChatGpt.Dto.Choice;
 import lombok.*;
 
 import java.io.Serializable;
