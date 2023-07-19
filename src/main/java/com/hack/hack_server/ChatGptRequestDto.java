@@ -3,13 +3,17 @@ package com.hack.hack_server;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 public class ChatGptRequestDto implements Serializable {
 
     private String model;
-    private String prompt;
+    //private String prompt;
+    @JsonProperty("messages")
+    private List<MessageRequestDto> messages;
     @JsonProperty("max_tokens")
     private Integer maxTokens;
     private Double temperature;
@@ -17,11 +21,11 @@ public class ChatGptRequestDto implements Serializable {
     private Double topP;
 
     @Builder
-    public ChatGptRequestDto(String model, String prompt,
+    public ChatGptRequestDto(String model, List<MessageRequestDto> messages,
                              Integer maxTokens, Double temperature,
                              Double topP) {
         this.model = model;
-        this.prompt = prompt;
+        this.messages = messages;
         this.maxTokens = maxTokens;
         this.temperature = temperature;
         this.topP = topP;
