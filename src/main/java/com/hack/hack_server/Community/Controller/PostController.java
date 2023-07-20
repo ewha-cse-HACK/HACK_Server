@@ -18,7 +18,7 @@ public class PostController {
     private final PostService postService;
     @GetMapping
     public PostListResponseDto getAllpost(int page){
-        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("created_date"));
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("id").descending());
         return postService.findAllPost(pageable);
     }
 
