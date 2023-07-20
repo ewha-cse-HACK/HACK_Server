@@ -30,6 +30,9 @@ public class Post extends BaseTimeEntity{
     @ColumnDefault("0")
     private Long viewcount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
     @Builder
     public Post(String title, String content){
         this.title = title;
