@@ -12,7 +12,7 @@ import java.util.List;
 public class PostDetailResponseDto {
     private String writer;
     private String content;
-    private Long likecount;
+    private int likecount;
 //    private 개인프로필, 글 사진
 //    private List<Comment~>
 }

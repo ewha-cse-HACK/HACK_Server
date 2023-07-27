@@ -23,11 +23,11 @@ public class Post extends BaseTimeEntity{
 
     @ColumnDefault("0")
     @Setter
-    private Long likecount;
+    private int likecount;
 
     @ColumnDefault("0")
     @Setter
-    private Long viewcount;
+    private int viewcount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
@@ -44,11 +44,4 @@ public class Post extends BaseTimeEntity{
         this.content = content;
     }
 
-//    public void updateLikecount(Long likecount){
-//        this.likecount = likecount;
-//    }
-//
-//    public void updateViewcount(Long viewcount){
-//        this.viewcount = viewcount;
-//    }
 }
