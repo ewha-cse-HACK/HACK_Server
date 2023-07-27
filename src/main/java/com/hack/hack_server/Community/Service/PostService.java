@@ -1,5 +1,6 @@
 package com.hack.hack_server.Community.Service;
 
+import com.hack.hack_server.Community.Dto.PostDetailResponseDto;
 import com.hack.hack_server.Community.Dto.PostListResponseDto;
 import com.hack.hack_server.Community.Dto.PostResponseDto;
 import com.hack.hack_server.Community.Entity.Post;
@@ -23,6 +24,17 @@ public class PostService {
                 .postList(postResponseDtos.getContent())
                 .currentPage(postResponseDtos.getNumber() + 1)
                 .totalPage(postResponseDtos.getTotalPages())
+                .build();
+        return responseDto;
+    }
+
+    @Transactional(readOnly = true)
+    public PostDetailResponseDto findDetailPost(Long post_id){
+        Post post = postRepository.findById(post_id).get();
+        PostDetailResponseDto responseDto = PostDetailResponseDto.builder()
+                .writer(post.getUser().getNickname())
+                .content(post.getContent())
+                .likecount(post.getLikecount())
                 .build();
         return responseDto;
     }
