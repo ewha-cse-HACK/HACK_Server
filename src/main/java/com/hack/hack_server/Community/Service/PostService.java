@@ -19,7 +19,7 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostListResponseDto findAllPost(Pageable pageable){
-        Page<Post> posts = postRepository.findAll(pageable);
+        Page<Post> posts = postRepository.findAllByDelIsFalse(pageable);
         Page<PostResponseDto> postResponseDtos = posts.map(PostResponseDto::new);
         PostListResponseDto responseDto = PostListResponseDto.builder()
                 .postList(postResponseDtos.getContent())
@@ -48,5 +48,13 @@ public class PostService {
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
         post.update(requestDto.getTitle(), requestDto.getContent());
+    }
+
+    @Transactional
+    public void deletePost(Long post_id){
+        Post post = postRepository.findById(post_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
+        if (post.isDel() == false)
+            post.setDel(true);
     }
 }

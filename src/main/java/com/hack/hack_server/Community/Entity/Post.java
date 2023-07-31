@@ -29,6 +29,11 @@ public class Post extends BaseTimeEntity{
     @Setter
     private int viewcount;
 
+
+    @Column(columnDefinition="tinyint(0) default 0")
+    @Setter
+    private boolean isDel;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;

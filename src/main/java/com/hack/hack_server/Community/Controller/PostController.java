@@ -37,9 +37,10 @@ public class PostController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @PostMapping("/{post_id}")
-//    public ResponseEntity addPost(@PathVariable ){
-//
-//    }
+    @DeleteMapping ("/{post_id}/delete")
+    public ResponseEntity addPost(@PathVariable Long post_id){
+        postService.deletePost(post_id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 }
