@@ -6,8 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 @DynamicInsert
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class Post extends BaseTimeEntity{
@@ -38,9 +37,10 @@ public class Post extends BaseTimeEntity{
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
     @Builder
-    public Post(String title, String content){
+    public Post(String title, String content, User user){
         this.title = title;
         this.content = content;
+        this.user = user;
     }
 
     /*게시글 수정*/
