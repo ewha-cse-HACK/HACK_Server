@@ -1,6 +1,6 @@
-package com.hack.hack_server.Community.Repository;
+package com.hack.hack_server.Repository;
 
-import com.hack.hack_server.Community.Entity.User;
+import com.hack.hack_server.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

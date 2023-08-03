@@ -1,10 +1,10 @@
-package com.hack.hack_server.Community.Service;
+package com.hack.hack_server.Community.Post.Service;
 
-import com.hack.hack_server.Community.Dto.*;
-import com.hack.hack_server.Community.Entity.Post;
-import com.hack.hack_server.Community.Entity.User;
-import com.hack.hack_server.Community.Repository.PostRepository;
-import com.hack.hack_server.Community.Repository.UserRepository;
+import com.hack.hack_server.Entity.Post;
+import com.hack.hack_server.Entity.User;
+import com.hack.hack_server.Community.Post.Dto.*;
+import com.hack.hack_server.Repository.PostRepository;
+import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostListResponseDto findAllPost(Pageable pageable){
+        System.out.println("------------");
+        System.out.println("here");
         Page<Post> posts = postRepository.findAllByDelIsFalse(pageable);
         Page<PostResponseDto> postResponseDtos = posts.map(PostResponseDto::new);
         PostListResponseDto responseDto = PostListResponseDto.builder()

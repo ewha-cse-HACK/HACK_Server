@@ -1,6 +1,6 @@
-package com.hack.hack_server.Community.Dto;
+package com.hack.hack_server.Community.Post.Dto;
 
-import com.hack.hack_server.Community.Entity.Post;
+import com.hack.hack_server.Entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.hack.hack_server.Community.Dto;
+package com.hack.hack_server.Community.Post.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
