@@ -13,13 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("rainbowletter/community")
+@RestController
+@RequestMapping(value = "rainbowletter/community")
 public class PostController {
 
     private final PostService postService;
-    @GetMapping
+    @GetMapping("rainbowletter/community")
     public PostListResponseDto getAllPost(@RequestParam(value = "page", defaultValue = "1", required = false) int page){
         Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("id").descending());
         return postService.findAllPost(pageable);
@@ -49,10 +49,19 @@ public class PostController {
         return ;
     }
 
-    @PostMapping("/post")
-    public ResponseEntity addPost(@RequestBody PostAddRequestDto requestDto){
-        postService.savePost(requestDto);
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
+//    @RequestMapping(value = "/post", method = {RequestMethod.POST, RequestMethod.GET})
 
+////    @RequestMapping(value="/savepost", method = {RequestMethod.GET, RequestMethod.POST})
+//    @PostMapping("/savepost")
+//    public void addPost(@RequestBody PostAddRequestDto requestDto){
+//        postService.savePost(requestDto);
+////        return new ResponseEntity(HttpStatus.CREATED);
+//    }
+
+//    @PostMapping("/save-post")
+//    @RequestMapping(value="/save-post", method = {RequestMethod.POST})
+    @PostMapping(value = "/savepost")
+    public void savePost(@RequestBody PostAddRequestDto requestDto){
+        postService.savePost(requestDto);
+    }
 }

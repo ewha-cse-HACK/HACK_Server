@@ -7,18 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class PostAddRequestDto {
-    private Long userId;
+    private Long userid;
     private String title;
     private String content;
 
-    @Builder
-    public Post toEntity(User user){
-        return Post.builder()
-                .title(title)
-                .content(content)
-                .user(user)
-                .build();
-    }
+//    @Builder
+//    public Post toEntity(User user){
+//        return Post.builder()
+//                .title(title)
+//                .content(content)
+//                .user(user)
+//                .build();
+//    }
 }

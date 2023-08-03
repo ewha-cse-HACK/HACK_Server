@@ -60,11 +60,21 @@ public class PostService {
 
     @Transactional
     public void savePost(PostAddRequestDto requestDto){
-        User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserId()));
+//        Long userid = requestDto.getUserid().longValue();
+        System.out.print("==================");
+        System.out.print("user:" + requestDto.getTitle());
+        System.out.print("==================");
+        User user = userRepository.findById(requestDto.getUserid())
+                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserid()));
         System.out.print("==================");
         System.out.print("user:" + user.getNickname());
         System.out.print("==================");
-        postRepository.save(requestDto.toEntity(user));
+        Post post = Post.builder()
+                .user(user)
+                .title(requestDto.getTitle())
+                .content(requestDto.getContent())
+                .build();
+
+        postRepository.save(post);
     }
 }
