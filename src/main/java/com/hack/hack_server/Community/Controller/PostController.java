@@ -49,17 +49,6 @@ public class PostController {
         return ;
     }
 
-//    @RequestMapping(value = "/post", method = {RequestMethod.POST, RequestMethod.GET})
-
-////    @RequestMapping(value="/savepost", method = {RequestMethod.GET, RequestMethod.POST})
-//    @PostMapping("/savepost")
-//    public void addPost(@RequestBody PostAddRequestDto requestDto){
-//        postService.savePost(requestDto);
-////        return new ResponseEntity(HttpStatus.CREATED);
-//    }
-
-//    @PostMapping("/save-post")
-//    @RequestMapping(value="/save-post", method = {RequestMethod.POST})
     @PostMapping(value = "/savepost")
     public void savePost(@RequestBody PostAddRequestDto requestDto){
         postService.savePost(requestDto);
