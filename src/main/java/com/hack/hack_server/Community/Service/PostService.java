@@ -1,11 +1,10 @@
 package com.hack.hack_server.Community.Service;
 
-import com.hack.hack_server.Community.Dto.PostDetailResponseDto;
-import com.hack.hack_server.Community.Dto.PostListResponseDto;
-import com.hack.hack_server.Community.Dto.PostModifyRequestDto;
-import com.hack.hack_server.Community.Dto.PostResponseDto;
+import com.hack.hack_server.Community.Dto.*;
 import com.hack.hack_server.Community.Entity.Post;
+import com.hack.hack_server.Community.Entity.User;
 import com.hack.hack_server.Community.Repository.PostRepository;
+import com.hack.hack_server.Community.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public PostListResponseDto findAllPost(Pageable pageable){
@@ -56,5 +56,15 @@ public class PostService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
         if (post.isDel() == false)
             post.setDel(true);
+    }
+
+    @Transactional
+    public void savePost(PostAddRequestDto requestDto){
+        User user = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserId()));
+        System.out.print("==================");
+        System.out.print("user:" + user.getNickname());
+        System.out.print("==================");
+        postRepository.save(requestDto.toEntity(user));
     }
 }

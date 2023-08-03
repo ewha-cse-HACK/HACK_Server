@@ -1,5 +1,6 @@
 package com.hack.hack_server.Community.Controller;
 
+import com.hack.hack_server.Community.Dto.PostAddRequestDto;
 import com.hack.hack_server.Community.Dto.PostDetailResponseDto;
 import com.hack.hack_server.Community.Dto.PostListResponseDto;
 import com.hack.hack_server.Community.Dto.PostModifyRequestDto;
@@ -38,9 +39,20 @@ public class PostController {
     }
 
     @DeleteMapping ("/{post_id}/delete")
-    public ResponseEntity addPost(@PathVariable Long post_id){
+    public ResponseEntity deletePost(@PathVariable Long post_id){
         postService.deletePost(post_id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/write")
+    public void writingPost(){
+        return ;
+    }
+
+    @PostMapping("/post")
+    public ResponseEntity addPost(@RequestBody PostAddRequestDto requestDto){
+        postService.savePost(requestDto);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }
