@@ -69,6 +69,11 @@ out/
 application.properties
 .gradle/
 build/
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+gradle/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
