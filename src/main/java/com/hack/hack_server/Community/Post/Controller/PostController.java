@@ -1,10 +1,10 @@
-package com.hack.hack_server.Community.Controller;
+package com.hack.hack_server.Community.Post.Controller;
 
-import com.hack.hack_server.Community.Dto.PostAddRequestDto;
-import com.hack.hack_server.Community.Dto.PostDetailResponseDto;
-import com.hack.hack_server.Community.Dto.PostListResponseDto;
-import com.hack.hack_server.Community.Dto.PostModifyRequestDto;
-import com.hack.hack_server.Community.Service.PostService;
+import com.hack.hack_server.Community.Post.Dto.PostAddRequestDto;
+import com.hack.hack_server.Community.Post.Dto.PostDetailResponseDto;
+import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
+import com.hack.hack_server.Community.Post.Dto.PostModifyRequestDto;
+import com.hack.hack_server.Community.Post.Service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
-    @GetMapping("rainbowletter/community")
+    @GetMapping
     public PostListResponseDto getAllPost(@RequestParam(value = "page", defaultValue = "1", required = false) int page){
         Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("id").descending());
         return postService.findAllPost(pageable);

@@ -1,6 +1,6 @@
-package com.hack.hack_server.Community.Repository;
+package com.hack.hack_server.Repository;
 
-import com.hack.hack_server.Community.Entity.Post;
+import com.hack.hack_server.Entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
