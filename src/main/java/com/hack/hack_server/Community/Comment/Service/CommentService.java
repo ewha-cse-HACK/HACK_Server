@@ -45,4 +45,14 @@ public class CommentService {
         comment.update(requestDto.getComment());
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @Transactional
+    public ResponseEntity deleteComment(Long commentId){
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(()-> new IllegalArgumentException("해당 댓글 없습니다: " + commentId));
+//        if (comment.getUser().getId() != userId) 면 400 반환 후 수정 못하도록
+        if (comment.isDel() == false)
+            comment.setDel(true);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
