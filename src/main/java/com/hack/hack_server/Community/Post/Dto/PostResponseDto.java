@@ -14,7 +14,7 @@ public class PostResponseDto {
     private String title;
     private int likecount;
     private int viewcount;
-    private Date created_date;
+    private Date createdDate;
 
     public PostResponseDto(Post post){
         this.id = post.getId();
@@ -22,6 +22,6 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.likecount = post.getLikecount();
         this.viewcount = post.getViewcount();
-        this.created_date = java.sql.Timestamp.valueOf(post.getCreated_date());
+        this.createdDate = java.sql.Timestamp.valueOf(post.getCreatedDate());
     }
 }

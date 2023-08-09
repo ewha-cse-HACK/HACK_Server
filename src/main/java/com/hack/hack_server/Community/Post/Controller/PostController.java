@@ -49,7 +49,7 @@ public class PostController {
         return ;
     }
 
-    @PostMapping(value = "/savepost")
+    @PostMapping("/save-post")
     public void savePost(@RequestBody PostAddRequestDto requestDto){
         postService.savePost(requestDto);
     }
