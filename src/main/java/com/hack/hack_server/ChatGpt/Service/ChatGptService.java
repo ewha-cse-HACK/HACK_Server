@@ -2,7 +2,7 @@ package com.hack.hack_server.ChatGpt.Service;
 
 import com.hack.hack_server.ChatGpt.Dto.MessageRequestDto;
 import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
-import com.hack.hack_server.ChatGptConfig;
+import com.hack.hack_server.ChatGpt.ChatGptConfig;
 import com.hack.hack_server.ChatGpt.Dto.ChatGptRequestDto;
 import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
 import org.springframework.beans.factory.annotation.Value;

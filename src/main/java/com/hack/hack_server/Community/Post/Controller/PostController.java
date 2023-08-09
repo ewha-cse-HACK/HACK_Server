@@ -34,14 +34,12 @@ public class PostController {
     public ResponseEntity modifyPost(@PathVariable Long post_id, @RequestBody PostModifyRequestDto requestDto){
         if (requestDto.getContent().isEmpty())
             return new ResponseEntity(HttpStatus.NO_CONTENT);
-        postService.modifyPost(post_id, requestDto);
-        return new ResponseEntity(HttpStatus.OK);
+        return postService.modifyPost(post_id, requestDto);
     }
 
     @DeleteMapping ("/{post_id}/delete")
     public ResponseEntity deletePost(@PathVariable Long post_id){
-        postService.deletePost(post_id);
-        return new ResponseEntity(HttpStatus.OK);
+        return postService.deletePost(post_id);
     }
 
     @GetMapping("/write")

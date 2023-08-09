@@ -1,10 +1,7 @@
 package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +24,10 @@ public class Comment extends BaseTimeEntity{
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
+    @Column(columnDefinition="tinyint(0) default 0")
+    @Setter
+    private boolean isDel;
 
     @Builder
     public Comment(String comment, User user, Post post){
