@@ -7,12 +7,12 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 public class PostDetailResponseDto {
     private String writer;
     private String content;
     private int likecount;
 //    private 개인프로필, 글 사진
-//    private List<Comment~>
+    private List<CommentDto> commentList;
 }

@@ -1,4 +1,4 @@
-package com.hack.hack_server;
+package com.hack.hack_server.ChatGpt;
 
 public class ChatGptConfig {
     public static final String AUTHORIZATION = "Authorization";
