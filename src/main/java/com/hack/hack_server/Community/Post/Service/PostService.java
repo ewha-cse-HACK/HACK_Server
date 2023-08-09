@@ -19,8 +19,6 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostListResponseDto findAllPost(Pageable pageable){
-        System.out.println("------------");
-        System.out.println("here");
         Page<Post> posts = postRepository.findAllByDelIsFalse(pageable);
         Page<PostResponseDto> postResponseDtos = posts.map(PostResponseDto::new);
         PostListResponseDto responseDto = PostListResponseDto.builder()
@@ -62,8 +60,8 @@ public class PostService {
 
     @Transactional
     public void savePost(PostAddRequestDto requestDto){
-        User user = userRepository.findById(requestDto.getUserid())
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserid()));
+        User user = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserId()));
         Post post = Post.builder()
                 .user(user)
                 .title(requestDto.getTitle())
