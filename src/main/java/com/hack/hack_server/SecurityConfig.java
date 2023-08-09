@@ -1,5 +1,7 @@
 package com.hack.hack_server;
 
+import com.hack.hack_server.Authentication.JwtProvider;
+import com.hack.hack_server.Repository.UserRepository;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final UserRepository userRepository;
+    @Bean
+    public JwtProvider jwtTokenProvider() {
+        return new JwtProvider(userRepository);
+    }
     //패스워드 암호화
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -33,5 +41,7 @@ public class SecurityConfig {
                 );
         return http.build();
     }
+
+
 }
 
