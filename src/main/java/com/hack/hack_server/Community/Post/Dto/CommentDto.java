@@ -7,12 +7,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommentDto {
-    private String nickname;
+    private String writer;
 //    private String profileImg;
     private String comment;
 
     public CommentDto(Comment comment){
-        this.nickname = comment.getUser().getNickname();
+        this.writer = comment.getUser().getNickname();
         this.comment = comment.getComment();
     }
 
