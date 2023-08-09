@@ -8,6 +8,8 @@ import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +46,13 @@ public class PostService {
     }
 
     @Transactional
-    public void modifyPost(Long post_id, PostModifyRequestDto requestDto){
+    public ResponseEntity modifyPost(Long post_id, PostModifyRequestDto requestDto){
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
+        if (post.getUser().getId() != requestDto.getUserId())
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         post.update(requestDto.getTitle(), requestDto.getContent());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Transactional
