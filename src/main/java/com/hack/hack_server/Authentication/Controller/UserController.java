@@ -2,12 +2,12 @@ package com.hack.hack_server.Authentication.Controller;
 
 import com.hack.hack_server.Authentication.Dto.JoinRequestDto;
 import com.hack.hack_server.Authentication.Dto.LoginRequestDto;
+import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Authentication.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -23,5 +23,21 @@ public class UserController {
     @PostMapping("/api/login")
     public String login(@RequestBody LoginRequestDto loginRequestDto) {
         return userService.login(loginRequestDto);
+    }
+
+    @GetMapping("/api/info")
+    public String info(@AuthenticationPrincipal PrincipalDetails principalDetails, Authentication authentication) {
+        System.out.println("PrincipalDetails " + principalDetails);
+        System.out.println("authentication " + authentication);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("PrincipalDetails ");
+        sb.append(principalDetails);
+        sb.append("\n\n");
+        sb.append("authentication ");
+        sb.append(authentication);
+
+        return sb.toString();
+
     }
 }
