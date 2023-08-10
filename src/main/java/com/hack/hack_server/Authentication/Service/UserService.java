@@ -26,6 +26,10 @@ public class UserService {
 
     public String join(JoinRequestDto joinRequestDto) {
         String email=  joinRequestDto.getEmail();
+        if ((userRepository.existsByEmail(email)))
+        {
+            return "이미 존재하는 회원입니다.";
+        }
         String nickname = joinRequestDto.getNickname();
         String rawPassword = joinRequestDto.getPassword();
         String password = passwordEncoder.encode(rawPassword);

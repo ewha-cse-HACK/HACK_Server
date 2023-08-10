@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +35,12 @@ public class User extends BaseTimeEntity{
     private String password;
 
     @Column(name = "roles")
-    private String roles; //USER, ADMIN
+    private String roles;
+
+    @PrePersist
+    public void prePersist(){
+        this.roles = this.roles == null? "ROLE_USER" : this.roles;
+    }
 
     public List<String> getRolesList(){
         if(this.roles.length() > 0){
