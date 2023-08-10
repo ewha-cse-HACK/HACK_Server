@@ -22,6 +22,6 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.likecount = post.getLikecount();
         this.viewcount = post.getViewcount();
-        this.createdDate = java.sql.Timestamp.valueOf(post.getCreatedDate());
+        this.createdDate = java.sql.Timestamp.valueOf(post.getCreatedTime());
     }
 }

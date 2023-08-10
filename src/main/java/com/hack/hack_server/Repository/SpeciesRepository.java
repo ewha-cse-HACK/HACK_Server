@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpeciesRepository extends JpaRepository<Species, Long> {
 
+    Species findSpeciesBySpeciesName(String speciesName);
+    boolean existsSpeciesBySpeciesName(String speciesName);
 }

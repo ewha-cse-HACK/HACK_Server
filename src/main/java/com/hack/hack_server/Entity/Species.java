@@ -2,6 +2,7 @@ package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -17,6 +18,12 @@ public class Species extends BaseTimeEntity{
     @Column(name = "species_id")
     private Long id;
 
-    private String name;
+    @Column(name = "species_name",unique = true)
+    private String speciesName;
+
+    @Builder
+    public Species(String speciesName){
+        this.speciesName = speciesName;
+    }
 
 }
