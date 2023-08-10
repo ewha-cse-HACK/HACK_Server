@@ -2,6 +2,7 @@ package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -49,4 +50,10 @@ public class Pet extends BaseTimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "species_id", referencedColumnName = "species_id")
     private Species species;
+
+    @Builder
+    public Pet(User user, Species species){
+        this.user = user;
+        this.species = species;
+    }
 }
