@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Entity
-public class CharacterMapping extends BaseTimeEntity{
+public class CharactersMapping extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class CharacterMapping extends BaseTimeEntity{
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id", referencedColumnName = "character_id")
-    private Character character;
+    @JoinColumn(name = "characters_id", referencedColumnName = "characters_id")
+    private Characters character;
 
 }
