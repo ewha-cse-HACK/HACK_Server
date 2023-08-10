@@ -32,4 +32,16 @@ public class PersonaService {
         return pet.getId();
     }
 
+    @Transactional
+    public Long addSpecies(SpeciesRequestDto requestDto){
+       if (speciesRepository.existsSpeciesByName(requestDto.getSpeciesName())){
+           new IllegalArgumentException("해당 종은 이미 있습니다: " + requestDto.getSpeciesName());
+       }
+       Species species = Species.builder()
+               .name(requestDto.getSpeciesName())
+               .build();
+       speciesRepository.save(species);
+       return species.getId();
+    }
+
 }
