@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-public class Character extends BaseTimeEntity{
+public class Characters extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "character_id")
+    @Column(name = "characters_id")
     private Long id;
 
     private String type;
