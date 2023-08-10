@@ -18,11 +18,12 @@ public class Species extends BaseTimeEntity{
     @Column(name = "species_id")
     private Long id;
 
-    private String name;
+    @Column(name = "species_name",unique = true)
+    private String speciesName;
 
     @Builder
-    public Species(String name){
-        this.name = name;
+    public Species(String speciesName){
+        this.speciesName = speciesName;
     }
 
 }

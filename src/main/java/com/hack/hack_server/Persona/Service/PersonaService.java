@@ -21,7 +21,7 @@ public class PersonaService {
 
     @Transactional
     public Long saveSpecies(SpeciesRequestDto requestDto){
-        Species species = speciesRepository.findSpeciesByName(requestDto.getSpeciesName());
+        Species species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
         User user = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다: " + requestDto.getUserId()));
         Pet pet = Pet.builder()
@@ -34,11 +34,11 @@ public class PersonaService {
 
     @Transactional
     public Long addSpecies(SpeciesRequestDto requestDto){
-       if (speciesRepository.existsSpeciesByName(requestDto.getSpeciesName())){
+       if (speciesRepository.existsSpeciesBySpeciesName(requestDto.getSpeciesName())){
            new IllegalArgumentException("해당 종은 이미 있습니다: " + requestDto.getSpeciesName());
        }
        Species species = Species.builder()
-               .name(requestDto.getSpeciesName())
+               .speciesName(requestDto.getSpeciesName())
                .build();
        speciesRepository.save(species);
        return species.getId();
