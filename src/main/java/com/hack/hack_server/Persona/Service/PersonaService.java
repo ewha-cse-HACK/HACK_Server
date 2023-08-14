@@ -22,8 +22,15 @@ public class PersonaService {
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
+        Species species;
+        if (!speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
+            species = Species.builder()
+                    .speciesName(requestDto.getSpeciesName())
+                    .build();
+            speciesRepository.save(species);
+        }else
+            species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
 
-        Species species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
         User user = principalDetails.getUser();
 
         Pet pet = Pet.builder()
@@ -48,26 +55,8 @@ public class PersonaService {
                 .build();
         mappingRepository.save(charMapTwo);
 
+
         return new ResponseEntity(HttpStatus.OK);
     }
-
-    @Transactional
-    public ResponseEntity addSpecies(PrincipalDetails principalDetails, SpeciesRequestDto requestDto){
-       if (speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
-           return new ResponseEntity(HttpStatus.BAD_REQUEST);
-       }
-       Species species = Species.builder()
-               .speciesName(requestDto.getSpeciesName())
-               .build();
-       User user = principalDetails.getUser();
-       speciesRepository.save(species);
-       Pet pet = Pet.builder()
-               .user(user)
-               .species(species)
-               .build();
-        petRepository.save(pet);
-       return new ResponseEntity(HttpStatus.OK);
-    }
-
 
 }

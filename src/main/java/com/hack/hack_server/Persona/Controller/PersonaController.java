@@ -23,10 +23,5 @@ public class PersonaController {
         return personaService.savePetInfo(principalDetails, requestDto);
     }
 
-    @PostMapping("/species/new")
-    public ResponseEntity addNewSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody SpeciesRequestDto requestDto){
-        return personaService.addSpecies(principalDetails, requestDto);
-    }
-
 
 }
