@@ -1,5 +1,6 @@
 package com.hack.hack_server.Community.Post.Controller;
 
+import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Community.Post.Dto.PostAddRequestDto;
 import com.hack.hack_server.Community.Post.Dto.PostDetailResponseDto;
 import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -31,15 +33,15 @@ public class PostController {
     }
 
     @PutMapping("/{post_id}")
-    public ResponseEntity modifyPost(@PathVariable Long post_id, @RequestBody PostModifyRequestDto requestDto){
+    public ResponseEntity modifyPost(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long post_id, @RequestBody PostModifyRequestDto requestDto){
         if (requestDto.getContent().isEmpty())
             return new ResponseEntity(HttpStatus.NO_CONTENT);
-        return postService.modifyPost(post_id, requestDto);
+        return postService.modifyPost(principalDetails, post_id, requestDto);
     }
 
     @DeleteMapping ("/{post_id}/delete")
-    public ResponseEntity deletePost(@PathVariable Long post_id){
-        return postService.deletePost(post_id);
+    public ResponseEntity deletePost(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long post_id){
+        return postService.deletePost(principalDetails, post_id);
     }
 
     @GetMapping("/write")
@@ -48,7 +50,7 @@ public class PostController {
     }
 
     @PostMapping("/save-post")
-    public void savePost(@RequestBody PostAddRequestDto requestDto){
-        postService.savePost(requestDto);
+    public ResponseEntity savePost(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PostAddRequestDto requestDto){
+        return postService.savePost(principalDetails, requestDto);
     }
 }

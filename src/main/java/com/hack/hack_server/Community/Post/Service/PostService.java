@@ -1,5 +1,6 @@
 package com.hack.hack_server.Community.Post.Service;
 
+import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.Comment;
 import com.hack.hack_server.Entity.Post;
 import com.hack.hack_server.Entity.User;
@@ -56,34 +57,39 @@ public class PostService {
     }
 
     @Transactional
-    public ResponseEntity modifyPost(Long post_id, PostModifyRequestDto requestDto){
+    public ResponseEntity modifyPost(PrincipalDetails principalDetails, Long post_id, PostModifyRequestDto requestDto){
+        User user = principalDetails.getUser();
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
-        if (post.getUser().getId() != requestDto.getUserId())
+        if (post.getUser().getId() != user.getId())
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         post.update(requestDto.getTitle(), requestDto.getContent());
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @Transactional
-    public ResponseEntity deletePost(Long post_id){
+    public ResponseEntity deletePost(PrincipalDetails principalDetails, Long post_id){
+        User user = principalDetails.getUser();
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
-        //        if (post.getUser().getId() != userId) 면 400 반환 후 수정 못하도록
+        if (post.getUser().getId() != user.getId())
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
         if (post.isDel() == false)
             post.setDel(true);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @Transactional
-    public void savePost(PostAddRequestDto requestDto){
-        User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + requestDto.getUserId()));
+    public ResponseEntity savePost(PrincipalDetails principalDetails, PostAddRequestDto requestDto){
+        User user = userRepository.findById(principalDetails.getUser().getId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + principalDetails.getUser().getId()));
         Post post = Post.builder()
                 .user(user)
                 .title(requestDto.getTitle())
                 .content(requestDto.getContent())
                 .build();
         postRepository.save(post);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }
