@@ -39,7 +39,7 @@ public class PostService {
     }
 
     @Transactional
-    public PostDetailResponseDto findDetailPost(Long postId){
+    public PostDetailResponseDto findDetailPost(PrincipalDetails principalDetails, Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + postId));
         post.setViewcount(post.getViewcount() + 1);
@@ -48,6 +48,8 @@ public class PostService {
         List<CommentDto> commentDtos = commentList.stream().map(CommentDto::new).collect(Collectors.toList());
 
         PostDetailResponseDto responseDto = PostDetailResponseDto.builder()
+                .userId(principalDetails.getUser().getId())
+                .writerId(post.getUser().getId())
                 .writer(post.getUser().getNickname())
                 .content(post.getContent())
                 .likecount(post.getLikecount())

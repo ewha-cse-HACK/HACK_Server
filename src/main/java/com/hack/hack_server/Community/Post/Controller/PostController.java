@@ -28,8 +28,8 @@ public class PostController {
     }
 
     @GetMapping("/{post_id}")
-    public PostDetailResponseDto getDetailPost(@PathVariable Long post_id){
-        return postService.findDetailPost(post_id);
+    public PostDetailResponseDto getDetailPost(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long post_id){
+        return postService.findDetailPost(principalDetails, post_id);
     }
 
     @PutMapping("/{post_id}")
