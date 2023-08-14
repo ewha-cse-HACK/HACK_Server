@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("rainbowletter/persona")
+@RequestMapping("rainbow-letter/persona")
 @RequiredArgsConstructor
 public class PersonaController {
     private final PersonaService personaService;

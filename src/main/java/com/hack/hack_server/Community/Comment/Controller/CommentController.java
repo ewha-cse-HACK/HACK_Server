@@ -11,7 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("rainbowletter/community")
+@RequestMapping("rainbow-letter/community")
 @RequiredArgsConstructor
 public class CommentController {
 
