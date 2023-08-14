@@ -4,6 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class SpeciesRequestDto {
-    private Long userId;
     private String speciesName;
 }

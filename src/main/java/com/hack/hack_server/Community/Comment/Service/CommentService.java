@@ -25,8 +25,8 @@ public class CommentService {
 
     @Transactional
     public void saveComment(PrincipalDetails principalDetails, Long postId, CommentSaveRequestDto requestDto){
-        User user = userRepository.findById(principalDetails.getUser().getId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 유저가 없습니다: " + principalDetails.getUser().getId()));
+        User user = principalDetails.getUser();
+
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + postId));
         Comment comment = Comment.builder()

@@ -82,8 +82,7 @@ public class PostService {
 
     @Transactional
     public ResponseEntity savePost(PrincipalDetails principalDetails, PostAddRequestDto requestDto){
-        User user = userRepository.findById(principalDetails.getUser().getId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + principalDetails.getUser().getId()));
+        User user = principalDetails.getUser();
         Post post = Post.builder()
                 .user(user)
                 .title(requestDto.getTitle())

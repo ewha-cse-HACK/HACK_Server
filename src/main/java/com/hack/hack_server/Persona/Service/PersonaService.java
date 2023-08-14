@@ -1,5 +1,6 @@
 package com.hack.hack_server.Persona.Service;
 
+import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.Pet;
 import com.hack.hack_server.Entity.Species;
 import com.hack.hack_server.Entity.User;
@@ -21,10 +22,9 @@ public class PersonaService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long saveSpecies(SpeciesRequestDto requestDto){
+    public Long saveSpecies(PrincipalDetails principalDetails, SpeciesRequestDto requestDto){
         Species species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
-        User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다: " + requestDto.getUserId()));
+        User user = principalDetails.getUser();
         Pet pet = Pet.builder()
                 .user(user)
                 .species(species)
@@ -34,16 +34,21 @@ public class PersonaService {
     }
 
     @Transactional
-    public ResponseEntity addSpecies(SpeciesRequestDto requestDto){
+    public ResponseEntity addSpecies(PrincipalDetails principalDetails, SpeciesRequestDto requestDto){
        if (speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
            return new ResponseEntity(HttpStatus.BAD_REQUEST);
        }
        Species species = Species.builder()
                .speciesName(requestDto.getSpeciesName())
                .build();
+       User user = principalDetails.getUser();
        speciesRepository.save(species);
-//       return species.getId();
-        return new ResponseEntity(HttpStatus.OK);
+       Pet pet = Pet.builder()
+               .user(user)
+               .species(species)
+               .build();
+        petRepository.save(pet);
+       return new ResponseEntity(HttpStatus.OK);
     }
 
 }
