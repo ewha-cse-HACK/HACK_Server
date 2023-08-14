@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "rainbowletter/community")
+@RequestMapping(value = "rainbow-letter/community")
 public class PostController {
 
     private final PostService postService;

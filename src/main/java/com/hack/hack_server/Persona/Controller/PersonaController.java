@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("rainbowletter/persona")
+@RequestMapping("rainbow-letter/persona")
 @RequiredArgsConstructor
 public class PersonaController {
     private final PersonaService personaService;
@@ -21,11 +21,6 @@ public class PersonaController {
     @PostMapping("/species")
     public ResponseEntity saveSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
         return personaService.savePetInfo(principalDetails, requestDto);
-    }
-
-    @PostMapping("/species/new")
-    public ResponseEntity addNewSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody SpeciesRequestDto requestDto){
-        return personaService.addSpecies(principalDetails, requestDto);
     }
 
 
