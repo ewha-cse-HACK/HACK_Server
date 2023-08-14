@@ -1,6 +1,7 @@
 package com.hack.hack_server.Persona.Controller;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
+import com.hack.hack_server.Persona.Dto.PetRequestDto;
 import com.hack.hack_server.Persona.Dto.SpeciesRequestDto;
 import com.hack.hack_server.Persona.Service.PersonaService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class PersonaController {
     @PostMapping("/species/new")
     public ResponseEntity addNewSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody SpeciesRequestDto requestDto){
         return personaService.addSpecies(principalDetails, requestDto);
+    }
+
+    @PostMapping("/pet")
+    public Long addPetInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
+        return personaService.addPetInfo(principalDetails, requestDto);
     }
 
 }

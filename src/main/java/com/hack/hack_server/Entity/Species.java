@@ -18,7 +18,7 @@ public class Species extends BaseTimeEntity{
     @Column(name = "species_id")
     private Long id;
 
-    @Column(name = "species_name",unique = true)
+    @Column(name = "species_name", unique = true)
     private String speciesName;
 
     @Builder
