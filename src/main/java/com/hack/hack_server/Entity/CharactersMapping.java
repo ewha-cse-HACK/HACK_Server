@@ -3,6 +3,7 @@ package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,11 @@ public class CharactersMapping extends BaseTimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "characters_id", referencedColumnName = "characters_id")
     private Characters character;
+
+    @Builder
+    public CharactersMapping(Pet pet, Characters character){
+        this.pet = pet;
+        this.character = character;
+    }
 
 }
