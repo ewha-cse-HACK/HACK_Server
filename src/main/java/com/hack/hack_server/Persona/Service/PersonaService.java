@@ -19,18 +19,36 @@ public class PersonaService {
     private final SpeciesRepository speciesRepository;
     private final CharactersRepository charactersRepository;
     private final CharactersMappingRepository mappingRepository;
-    private final UserRepository userRepository;
 
     @Transactional
-    public Long saveSpecies(PrincipalDetails principalDetails, SpeciesRequestDto requestDto){
+    public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
+
         Species species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
         User user = principalDetails.getUser();
+
         Pet pet = Pet.builder()
                 .user(user)
                 .species(species)
+                .name(requestDto.getName())
                 .build();
         petRepository.save(pet);
-        return pet.getId();
+
+        Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
+        Characters charTwo = charactersRepository.findCharactersByType(requestDto.getCharTwo());
+
+        CharactersMapping charMapOne = CharactersMapping.builder()
+                .pet(pet)
+                .character(charOne)
+                .build();
+        mappingRepository.save(charMapOne);
+
+        CharactersMapping charMapTwo = CharactersMapping.builder()
+                .pet(pet)
+                .character(charTwo)
+                .build();
+        mappingRepository.save(charMapTwo);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Transactional
@@ -50,32 +68,6 @@ public class PersonaService {
         petRepository.save(pet);
        return new ResponseEntity(HttpStatus.OK);
     }
-
-
-    @Transactional
-    public Long addPetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
-        User user = principalDetails.getUser();
-        Pet pet = petRepository.findByUserId(user.getId()); //현재 로그인된 유저로 등록된 펫 찾기
-        petRepository.updateName(pet.getId(), requestDto.getName());
-
-        Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
-        Characters charTwo = charactersRepository.findCharactersByType(requestDto.getCharTwo());
-
-        CharactersMapping charMapOne = CharactersMapping.builder()
-                .pet(pet)
-                .character(charOne)
-                .build();
-        mappingRepository.save(charMapOne);
-
-        CharactersMapping charMapTwo = CharactersMapping.builder()
-                .pet(pet)
-                .character(charTwo)
-                .build();
-        mappingRepository.save(charMapTwo);
-
-        return charMapOne.getId(); //일단 암거나 리턴
-    }
-
 
 
 }

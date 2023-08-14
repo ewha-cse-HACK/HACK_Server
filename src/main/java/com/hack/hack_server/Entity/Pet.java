@@ -52,8 +52,9 @@ public class Pet extends BaseTimeEntity{
     private Species species;
 
     @Builder
-    public Pet(User user, Species species){
+    public Pet(User user, Species species, String name){
         this.user = user;
         this.species = species;
+        this.name = name;
     }
 }

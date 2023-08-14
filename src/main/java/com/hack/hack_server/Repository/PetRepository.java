@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PetRepository extends JpaRepository<Pet, Long> {
     Pet findByUserId(Long id);
 
-    @Transactional
-    @Modifying
-    @Query(nativeQuery = true, value = "update pet p set p.name=:name where pet_id=:pet_id")
-    int updateName(@Param("pet_id") Long petId, @Param("name") String name);
+//    @Transactional
+//    @Modifying
+//    @Query(nativeQuery = true, value = "update pet p set p.name=:name where pet_id=:pet_id")
+//    int updateName(@Param("pet_id") Long petId, @Param("name") String name);
 }

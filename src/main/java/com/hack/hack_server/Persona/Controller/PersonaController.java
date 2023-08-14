@@ -19,8 +19,8 @@ public class PersonaController {
     private final PersonaService personaService;
 
     @PostMapping("/species")
-    public Long saveSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody SpeciesRequestDto requestDto){
-        return personaService.saveSpecies(principalDetails, requestDto);
+    public ResponseEntity saveSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
+        return personaService.savePetInfo(principalDetails, requestDto);
     }
 
     @PostMapping("/species/new")
@@ -28,9 +28,5 @@ public class PersonaController {
         return personaService.addSpecies(principalDetails, requestDto);
     }
 
-    @PostMapping("/pet")
-    public Long addPetInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
-        return personaService.addPetInfo(principalDetails, requestDto);
-    }
 
 }
