@@ -1,5 +1,6 @@
 package com.hack.hack_server.Community.Comment.Service;
 
+import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Community.Comment.Dto.CommentSaveRequestDto;
 import com.hack.hack_server.Community.Comment.Dto.CommentUpdateRequestDto;
 import com.hack.hack_server.Entity.Comment;
@@ -23,9 +24,9 @@ public class CommentService {
 
 
     @Transactional
-    public void saveComment(Long postId, CommentSaveRequestDto requestDto){
-        User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 유저가 없습니다: " + requestDto.getUserId()));
+    public void saveComment(PrincipalDetails principalDetails, Long postId, CommentSaveRequestDto requestDto){
+        User user = userRepository.findById(principalDetails.getUser().getId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 유저가 없습니다: " + principalDetails.getUser().getId()));
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다: " + postId));
         Comment comment = Comment.builder()
@@ -37,20 +38,21 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseEntity modifyComment(Long commentId, CommentUpdateRequestDto requestDto){
+    public ResponseEntity modifyComment(PrincipalDetails principalDetails, Long commentId, CommentUpdateRequestDto requestDto){
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글 없습니다: " + commentId));
-        if (requestDto.getUserId() != comment.getUser().getId()) //현재 수정하려는 사용자와 댓글 작성자가 다르면
+        if (principalDetails.getUser().getId() != comment.getUser().getId()) //현재 수정하려는 사용자와 댓글 작성자가 다르면
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         comment.update(requestDto.getComment());
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @Transactional
-    public ResponseEntity deleteComment(Long commentId){
+    public ResponseEntity deleteComment(PrincipalDetails principalDetails, Long commentId){
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 댓글 없습니다: " + commentId));
-//        if (comment.getUser().getId() != userId) 면 400 반환 후 수정 못하도록
+        if (comment.getUser().getId() != principalDetails.getUser().getId())
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
         if (comment.isDel() == false)
             comment.setDel(true);
         return new ResponseEntity(HttpStatus.OK);
