@@ -10,6 +10,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PostDetailResponseDto {
+    private Long userId;
+    private Long writerId;
     private String writer;
     private String content;
     private int likecount;
