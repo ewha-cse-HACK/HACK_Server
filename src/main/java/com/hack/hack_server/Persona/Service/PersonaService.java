@@ -6,6 +6,7 @@ import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.Persona.Dto.SpeciesRequestDto;
 import com.hack.hack_server.Repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,15 +34,16 @@ public class PersonaService {
     }
 
     @Transactional
-    public Long addSpecies(SpeciesRequestDto requestDto){
-       if (speciesRepository.existsSpeciesBySpeciesName(requestDto.getSpeciesName())){
-           new IllegalArgumentException("해당 종은 이미 있습니다: " + requestDto.getSpeciesName());
+    public ResponseEntity addSpecies(SpeciesRequestDto requestDto){
+       if (speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
+           return new ResponseEntity(HttpStatus.BAD_REQUEST);
        }
        Species species = Species.builder()
                .speciesName(requestDto.getSpeciesName())
                .build();
        speciesRepository.save(species);
-       return species.getId();
+//       return species.getId();
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

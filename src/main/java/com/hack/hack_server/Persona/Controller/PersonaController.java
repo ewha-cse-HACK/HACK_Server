@@ -21,7 +21,7 @@ public class PersonaController {
     }
 
     @PostMapping("/species/new")
-    public Long addNewSpecies(@RequestBody SpeciesRequestDto requestDto){
+    public ResponseEntity addNewSpecies(@RequestBody SpeciesRequestDto requestDto){
         return personaService.addSpecies(requestDto);
     }
 
