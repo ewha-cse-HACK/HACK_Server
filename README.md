@@ -136,5 +136,3 @@ frontend <br>
 <br>
 
 
-### 🦶Project Log
-[notion] https://www.notion.so/HACK-4af07ba7630a4a4895472163585a872c
