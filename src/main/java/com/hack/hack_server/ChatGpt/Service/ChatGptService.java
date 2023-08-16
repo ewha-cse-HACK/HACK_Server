@@ -1,11 +1,8 @@
 package com.hack.hack_server.ChatGpt.Service;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
-import com.hack.hack_server.ChatGpt.Dto.MessageRequestDto;
-import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
+import com.hack.hack_server.ChatGpt.Dto.*;
 import com.hack.hack_server.ChatGpt.ChatGptConfig;
-import com.hack.hack_server.ChatGpt.Dto.ChatGptRequestDto;
-import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
 import com.hack.hack_server.Entity.Characters;
 import com.hack.hack_server.Entity.CharactersMapping;
 import com.hack.hack_server.Entity.Pet;
@@ -48,7 +45,7 @@ public class ChatGptService {
         return responseEntity.getBody();
     }
 
-    public ChatGptResponseDto askQuestion(Long petId, PrincipalDetails principalDetails, QuestionRequestDto requestDto) {
+    public ChatGptAnswerResponseDto askQuestion(Long petId, PrincipalDetails principalDetails, QuestionRequestDto requestDto) {
         User owner = principalDetails.getUser();
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(()-> new IllegalArgumentException("pet_id 오류: " + petId));
@@ -81,16 +78,14 @@ public class ChatGptService {
                         .content(requestDto.getQuestion())
                         .build());
 
-        return this.getResponse(
-                this.buildHttpEntity(
-                        new ChatGptRequestDto(
+        ChatGptResponseDto responseDto =  this.getResponse(this.buildHttpEntity(new ChatGptRequestDto(
                                 ChatGptConfig.MODEL,
                                 messages,
                                 ChatGptConfig.MAX_TOKEN,
                                 ChatGptConfig.TEMPERATURE,
-                                ChatGptConfig.TOP_P
-                        )
-                )
-        );
+                                ChatGptConfig.TOP_P)));
+
+        return new ChatGptAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent());
+
     }
 }

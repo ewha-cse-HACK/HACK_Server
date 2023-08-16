@@ -1,6 +1,7 @@
 package com.hack.hack_server.ChatGpt.Controller;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
+import com.hack.hack_server.ChatGpt.Dto.ChatGptAnswerResponseDto;
 import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
 import com.hack.hack_server.ChatGpt.Service.ChatGptService;
 import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
@@ -18,7 +19,7 @@ public class ChatGptController {
     }
 
     @PostMapping("/{pet_id}")
-    public ChatGptResponseDto sendQuestion(@PathVariable Long pet_id, @AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody QuestionRequestDto requestDto) {
+    public ChatGptAnswerResponseDto sendQuestion(@PathVariable Long pet_id, @AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody QuestionRequestDto requestDto) {
         return chatGptService.askQuestion(pet_id, principalDetails, requestDto);
     }
 }
