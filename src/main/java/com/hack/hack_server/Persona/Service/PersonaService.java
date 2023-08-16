@@ -22,6 +22,7 @@ public class PersonaService {
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
+        /*종 저장*/
         Species species;
         if (!speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
             species = Species.builder()
@@ -33,13 +34,15 @@ public class PersonaService {
 
         User user = principalDetails.getUser();
 
+        /*pet 객체 생성*/
         Pet pet = Pet.builder()
                 .user(user)
                 .species(species)
-                .name(requestDto.getName())
+                .requestDto(requestDto)
                 .build();
         petRepository.save(pet);
 
+        /*성격 저장*/
         Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
         Characters charTwo = charactersRepository.findCharactersByType(requestDto.getCharTwo());
 

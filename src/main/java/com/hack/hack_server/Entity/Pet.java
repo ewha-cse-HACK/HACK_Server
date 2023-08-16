@@ -1,5 +1,6 @@
 package com.hack.hack_server.Entity;
 
+import com.hack.hack_server.Persona.Dto.PetRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,9 +53,16 @@ public class Pet extends BaseTimeEntity{
     private Species species;
 
     @Builder
-    public Pet(User user, Species species, String name){
+    public Pet(User user, Species species, PetRequestDto requestDto){
         this.user = user;
         this.species = species;
-        this.name = name;
+        this.name = requestDto.getName();
+        this.ownerName = requestDto.getOwnerName();
+        this.favoritePlace = requestDto.getFavoritePlace();
+        this.favoritePlay = requestDto.getFavoritePlay();
+        this.habit = requestDto.getHabit();
+        this.routine = requestDto.getRoutine();
+        this.favoriteSnack = requestDto.getFavoriteSnack();
+        this.favoriteTime = requestDto.getFavoriteTime();
     }
 }

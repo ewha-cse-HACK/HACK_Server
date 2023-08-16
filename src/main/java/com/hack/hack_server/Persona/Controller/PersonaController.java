@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
     private final PersonaService personaService;
 
-    @PostMapping("/species")
-    public ResponseEntity saveSpecies(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
+    @PostMapping("/save")
+    public ResponseEntity savePersona(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
         return personaService.savePetInfo(principalDetails, requestDto);
     }
 
