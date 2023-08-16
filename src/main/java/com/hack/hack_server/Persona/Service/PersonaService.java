@@ -3,12 +3,10 @@ package com.hack.hack_server.Persona.Service;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.*;
 import com.hack.hack_server.Persona.Dto.PetRequestDto;
-import com.hack.hack_server.Persona.Dto.SpeciesRequestDto;
 import com.hack.hack_server.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
