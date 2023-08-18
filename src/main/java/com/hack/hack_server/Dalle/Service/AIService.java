@@ -1,7 +1,8 @@
 package com.hack.hack_server.Dalle.Service;
 
-import com.hack.hack_server.Dalle.Dto.CreateImageRequest;
-import com.hack.hack_server.Dalle.Service.OpenAiService;
+import com.theokanning.openai.image.CreateImageRequest;
+import com.theokanning.openai.service.OpenAiService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AIService {
 
-    private OpenAiService openAiService;
+    @Resource(name = "getOpenAiService")
+    private final OpenAiService openAiService;
 
     public String generatePicture(String prompt) {
         CreateImageRequest createImageRequest = CreateImageRequest.builder()

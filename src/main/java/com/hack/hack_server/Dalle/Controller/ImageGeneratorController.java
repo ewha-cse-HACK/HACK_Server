@@ -13,8 +13,10 @@ public class ImageGeneratorController {
 
     private final AIService aiService;
 
+
     @PostMapping("/generate")
     public ResponseEntity<?> generateImage(@RequestBody String prompt) {
         return new ResponseEntity<>(aiService.generatePicture(prompt), HttpStatus.OK);
     }
+
 }
