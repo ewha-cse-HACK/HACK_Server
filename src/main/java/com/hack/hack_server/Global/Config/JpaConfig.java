@@ -1,4 +1,4 @@
-package com.hack.hack_server;
+package com.hack.hack_server.Global.Config;
 
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 

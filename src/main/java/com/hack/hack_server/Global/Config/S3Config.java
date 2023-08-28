@@ -1,4 +1,4 @@
-package com.hack.hack_server;
+package com.hack.hack_server.Global.Config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

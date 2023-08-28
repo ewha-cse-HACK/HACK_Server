@@ -1,4 +1,4 @@
-package com.hack.hack_server;
+package com.hack.hack_server.Global.Config;
 
 import com.hack.hack_server.Authentication.JwtAuthenticationFilter;
 import com.hack.hack_server.Authentication.JwtAuthorizationFilter;
