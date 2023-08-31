@@ -11,6 +11,8 @@ public class PapagoController {
 
     private final NaverTransService naverTransService;
 
+
+    //Papago API 테스트용 controller
     @PostMapping("/translate")
     public String translate(@RequestBody String prompt) {
         return naverTransService.getTransSentence(prompt);
