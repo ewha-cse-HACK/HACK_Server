@@ -17,6 +17,7 @@ public class PersonaService {
     private final SpeciesRepository speciesRepository;
     private final CharactersRepository charactersRepository;
     private final CharactersMappingRepository mappingRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
@@ -32,6 +33,7 @@ public class PersonaService {
 
         User user = principalDetails.getUser();
 
+
         /*pet 객체 생성*/
         Pet pet = Pet.builder()
                 .user(user)
@@ -39,6 +41,14 @@ public class PersonaService {
                 .requestDto(requestDto)
                 .build();
         petRepository.save(pet);
+
+
+        if (requestDto.getImage() == null)
+            user.updateProfileImage(species.getDefaultImage());
+        else
+            user.updateProfileImage(requestDto.getImage());
+
+
 
         /*성격 저장*/
         Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
@@ -56,7 +66,7 @@ public class PersonaService {
                 .build();
         mappingRepository.save(charMapTwo);
 
-
+        userRepository.save(user);
         return new ResponseEntity(HttpStatus.OK);
     }
 
