@@ -53,4 +53,11 @@ public class ImageGeneratorController {
         return new ResponseEntity<>(aiService.generatePicture(naverTransService.getTransSentence(shortKoJour)), HttpStatus.OK);
     }
 
+
+    //DALL-E api 테스트
+    @PostMapping("/image")
+    public ResponseEntity<?> generateImage(@RequestBody String prompt) {
+        return new ResponseEntity<>(aiService.generatePicture(prompt), HttpStatus.OK);
+    }
+
 }
