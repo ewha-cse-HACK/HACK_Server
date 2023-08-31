@@ -51,8 +51,8 @@ public class ChatGptService {
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(()-> new IllegalArgumentException("pet_id 오류: " + petId));
         List<CharactersMapping> characterList = mappingRepository.findByPet_Id(petId);
-        Characters charOne = charactersRepository.findById(characterList.get(0).getId()).get();
-        Characters charTwo = charactersRepository.findById(characterList.get(1).getId()).get();
+        Characters charOne = charactersRepository.findById(characterList.get(0).getCharacter().getId()).get();
+        Characters charTwo = charactersRepository.findById(characterList.get(1).getCharacter().getId()).get();
 
         List<MessageRequestDto> messages = new ArrayList<>();
 
