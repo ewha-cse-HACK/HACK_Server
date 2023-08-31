@@ -18,7 +18,7 @@ public class CharactersMapping extends BaseTimeEntity{
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
     private Pet pet;
 
