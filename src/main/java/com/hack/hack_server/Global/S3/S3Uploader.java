@@ -1,4 +1,4 @@
-package com.hack.hack_server.Global;
+package com.hack.hack_server.Global.S3;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
@@ -28,9 +28,9 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public String getPreSignedURL(String dirName){
+    public String getPreSignedURL(String dirname){
         String preSignedURL = "";
-        String fileName = dirName + "/" + UUID.randomUUID().toString();
+        String fileName = dirname + "/" + UUID.randomUUID().toString();
 
         Date expiration = new Date();
         long expTimeMillis = expiration.getTime();
