@@ -3,12 +3,10 @@ package com.hack.hack_server.ChatGpt.Service;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.ChatGpt.Dto.*;
 import com.hack.hack_server.ChatGpt.ChatGptConfig;
-import com.hack.hack_server.Entity.Characters;
-import com.hack.hack_server.Entity.CharactersMapping;
-import com.hack.hack_server.Entity.Pet;
-import com.hack.hack_server.Entity.User;
+import com.hack.hack_server.Entity.*;
 import com.hack.hack_server.Repository.CharactersMappingRepository;
 import com.hack.hack_server.Repository.CharactersRepository;
+import com.hack.hack_server.Repository.JournalRepository;
 import com.hack.hack_server.Repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +24,7 @@ public class ChatGptService {
     private final PetRepository petRepository;
     private final CharactersRepository charactersRepository;
     private final CharactersMappingRepository mappingRepository;
+    private final JournalRepository journalRepository;
 
     @Value("${api-key.chat-gpt}")
     private String apiKey;
@@ -93,6 +92,7 @@ public class ChatGptService {
 
     //[기능: 일기 훔쳐보기에서의 '일기' 생성]
     public ChatGptAnswerResponseDto generateJournal(Long petId, PrincipalDetails principalDetails){
+        User user = principalDetails.getUser();
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(()-> new IllegalArgumentException("pet_id 오류: " + petId));
         List<CharactersMapping> characterList = mappingRepository.findByPet_Id(petId);
@@ -121,7 +121,14 @@ public class ChatGptService {
                 ChatGptConfig.TOP_P)));
         //max_token + 200 = 500
 
-        //* * * 일기 내용 일기훔쳐보기에 저장 * * * (일기 Entity)
+        //* * * GPT가 생성한 일기 내용 저장 * * *
+        /*일기 객체 생성*/
+        Journal journal = Journal.builder()
+                .user(user)
+                .pet(pet)
+                .content(responseDto.getChoices().get(0).getMessage().getContent())
+                .build();
+        journalRepository.save(journal);
 
         return new ChatGptAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent());
     }
