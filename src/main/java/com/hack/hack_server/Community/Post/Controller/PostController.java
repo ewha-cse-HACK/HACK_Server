@@ -6,6 +6,7 @@ import com.hack.hack_server.Community.Post.Dto.PostDetailResponseDto;
 import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
 import com.hack.hack_server.Community.Post.Dto.PostModifyRequestDto;
 import com.hack.hack_server.Community.Post.Service.PostService;
+import com.hack.hack_server.Global.S3.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
