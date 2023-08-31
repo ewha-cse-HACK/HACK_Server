@@ -1,4 +1,4 @@
-package com.hack.hack_server.Global;
+package com.hack.hack_server.Global.S3;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
