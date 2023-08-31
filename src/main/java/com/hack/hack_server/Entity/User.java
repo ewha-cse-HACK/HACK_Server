@@ -1,10 +1,7 @@
 package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
@@ -12,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @DynamicInsert
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @Entity
@@ -37,6 +34,10 @@ public class User extends BaseTimeEntity{
 
     @Column(name = "profile_image")
     private String profileImage;
+
+    public void updateProfileImage(String profileImage){
+        this.profileImage = profileImage;
+    }
 
     @PrePersist
     public void prePersist(){

@@ -21,6 +21,9 @@ public class Species extends BaseTimeEntity{
     @Column(name = "species_name", unique = true)
     private String speciesName;
 
+    @Column(name = "default_image")
+    private String defaultImage;
+
     @Builder
     public Species(String speciesName){
         this.speciesName = speciesName;

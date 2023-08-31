@@ -1,6 +1,7 @@
 package com.hack.hack_server.Persona.Dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class PetRequestDto {
