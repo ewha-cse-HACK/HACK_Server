@@ -12,9 +12,9 @@ import java.util.List;
 public class PostDetailResponseDto {
     private Long userId;
     private Long writerId;
-    private String writer;
+    private String nickname;
     private String content;
     private int likecount;
-//    private 개인프로필, 글 사진
+    private String profileImage;
     private List<CommentDto> commentList;
 }

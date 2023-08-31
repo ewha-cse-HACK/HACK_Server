@@ -8,14 +8,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CommentDto {
     private Long writerId;
-    private String writer;
-//    private String profileImg;
+    private String nickname;
+    private String profileImage;
     private String comment;
 
     public CommentDto(Comment comment){
         this.writerId = comment.getUser().getId();
-        this.writer = comment.getUser().getNickname();
+        this.nickname = comment.getUser().getNickname();
         this.comment = comment.getComment();
+        this.profileImage = comment.getUser().getProfileImage();
     }
 
 }

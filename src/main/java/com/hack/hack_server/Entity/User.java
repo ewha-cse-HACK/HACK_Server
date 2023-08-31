@@ -35,6 +35,9 @@ public class User extends BaseTimeEntity{
     @Column(name = "roles")
     private String roles;
 
+    @Column(name = "profile_image")
+    private String profileImage;
+
     @PrePersist
     public void prePersist(){
         this.roles = this.roles == null? "ROLE_USER" : this.roles;

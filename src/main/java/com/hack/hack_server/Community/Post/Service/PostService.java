@@ -50,9 +50,10 @@ public class PostService {
         PostDetailResponseDto responseDto = PostDetailResponseDto.builder()
                 .userId(principalDetails.getUser().getId())
                 .writerId(post.getUser().getId())
-                .writer(post.getUser().getNickname())
+                .nickname(post.getUser().getNickname())
                 .content(post.getContent())
                 .likecount(post.getLikecount())
+                .profileImage(post.getUser().getProfileImage())
                 .commentList(commentDtos)
                 .build();
         return responseDto;
