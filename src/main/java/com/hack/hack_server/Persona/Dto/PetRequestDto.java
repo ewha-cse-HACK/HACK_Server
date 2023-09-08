@@ -3,6 +3,8 @@ package com.hack.hack_server.Persona.Dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 public class PetRequestDto {
     private String speciesName; //반려동물 종류
@@ -17,5 +19,6 @@ public class PetRequestDto {
     private String favoritePlace;
     private String routine;
     private String image;
+    private Date passedDate;
 
 }

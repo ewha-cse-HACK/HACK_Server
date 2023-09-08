@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.sql.Date;
+
 @DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
@@ -52,6 +54,9 @@ public class Pet extends BaseTimeEntity{
     @JoinColumn(name = "species_id", referencedColumnName = "species_id")
     private Species species;
 
+    @Column(name = "passed_date")
+    private Date passedDate;
+
     @Builder
     public Pet(User user, Species species, PetRequestDto requestDto){
         this.user = user;
@@ -65,5 +70,6 @@ public class Pet extends BaseTimeEntity{
         this.favoriteSnack = requestDto.getFavoriteSnack();
         this.favoriteTime = requestDto.getFavoriteTime();
         this.image = requestDto.getImage();
+        this.passedDate = requestDto.getPassedDate();
     }
 }
