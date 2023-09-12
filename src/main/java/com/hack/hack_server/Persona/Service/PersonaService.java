@@ -41,9 +41,9 @@ public class PersonaService {
                 .build();
 
         if (requestDto.getPetImage() == null)
-            pet.setPetImage(species.getDefaultImage());
+            pet.setPetProfile(species.getDefaultImage());
         else
-            pet.setPetImage(requestDto.getPetImage());
+            pet.setPetProfile(requestDto.getPetImage());
 
         petRepository.save(pet);
 

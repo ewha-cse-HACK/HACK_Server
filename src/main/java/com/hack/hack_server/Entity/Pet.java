@@ -23,7 +23,7 @@ public class Pet extends BaseTimeEntity{
 
     @Column(name = "image")
     @Setter
-    private String petImage;
+    private String petProfile;
 
     @Column(name = "favorite_play")
     private String favoritePlay;
@@ -68,7 +68,7 @@ public class Pet extends BaseTimeEntity{
         this.routine = requestDto.getRoutine();
         this.favoriteSnack = requestDto.getFavoriteSnack();
         this.favoriteTime = requestDto.getFavoriteTime();
-        this.petImage = requestDto.getPetImage();
+        this.petProfile = requestDto.getPetImage();
         this.passedDate = requestDto.getPassedDate();
     }
 }
