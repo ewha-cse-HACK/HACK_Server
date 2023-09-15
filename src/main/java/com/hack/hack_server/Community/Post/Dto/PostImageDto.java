@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PostImageDto {
-    private String image;
+    private String imageUrl;
 
     public PostImageDto(PostImage postImage){
-        this.image = postImage.getImageUrl();
+        this.imageUrl = postImage.getImageUrl();
     }
 }

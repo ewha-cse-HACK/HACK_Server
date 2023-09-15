@@ -98,6 +98,15 @@ public class PostService {
                 .content(requestDto.getContent())
                 .build();
         postRepository.save(post);
+        for(int i=0;i<requestDto.getImageList().size();i++){
+            PostImageRequestDto p = requestDto.getImageList().get(i);
+
+            PostImage img = PostImage.builder()
+                    .post(post)
+                    .imageUrl(p.getImageUrl())
+                    .build();
+            postImageRepository.save(img);
+        }
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }

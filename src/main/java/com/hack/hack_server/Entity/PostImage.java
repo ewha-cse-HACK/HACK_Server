@@ -2,6 +2,7 @@ package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -22,5 +23,11 @@ public class PostImage extends BaseTimeEntity {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Builder
+    public PostImage(String imageUrl, Post post){
+        this.imageUrl = imageUrl;
+        this.post = post;
+    }
 
 }
