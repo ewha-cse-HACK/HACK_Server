@@ -74,6 +74,20 @@ public class PostService {
         if (post.getUser().getId() != user.getId())
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         post.update(requestDto.getTitle(), requestDto.getContent());
+
+        postImageRepository.deletePostImageByPost_Id(post_id);
+
+        if (requestDto.getImageList() != null){
+            for(int i=0;i<requestDto.getImageList().size();i++) {
+                PostImageDto p = requestDto.getImageList().get(i);
+
+                PostImage img = PostImage.builder()
+                        .post(post)
+                        .imageUrl(p.getImageUrl())
+                        .build();
+                postImageRepository.save(img);
+            }
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -99,15 +113,19 @@ public class PostService {
                 .content(requestDto.getContent())
                 .build();
         postRepository.save(post);
-        for(int i=0;i<requestDto.getImageList().size();i++){
-            PostImageRequestDto p = requestDto.getImageList().get(i);
 
-            PostImage img = PostImage.builder()
-                    .post(post)
-                    .imageUrl(p.getImageUrl())
-                    .build();
-            postImageRepository.save(img);
+        if (requestDto.getImageList() != null){
+            for(int i=0;i<requestDto.getImageList().size();i++){
+                PostImageDto p = requestDto.getImageList().get(i);
+
+                PostImage img = PostImage.builder()
+                        .post(post)
+                        .imageUrl(p.getImageUrl())
+                        .build();
+                postImageRepository.save(img);
+            }
         }
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }

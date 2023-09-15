@@ -8,5 +8,5 @@ import java.util.List;
 public class PostAddRequestDto {
     private String title;
     private String content;
-    private List<PostImageRequestDto> imageList;
+    private List<PostImageDto> imageList;
 }
