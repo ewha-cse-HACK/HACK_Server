@@ -18,7 +18,7 @@ public class PetRequestDto {
     private String habit;
     private String favoritePlace;
     private String routine;
-    private String image;
+    private String petImage;
     private Date passedDate;
 
 }

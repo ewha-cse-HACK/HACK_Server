@@ -2,10 +2,7 @@ package com.hack.hack_server.Entity;
 
 import com.hack.hack_server.Persona.Dto.PetRequestDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.sql.Date;
@@ -25,7 +22,8 @@ public class Pet extends BaseTimeEntity{
     private String name;
 
     @Column(name = "image")
-    private String image;
+    @Setter
+    private String petProfile;
 
     @Column(name = "favorite_play")
     private String favoritePlay;
@@ -57,6 +55,7 @@ public class Pet extends BaseTimeEntity{
     @Column(name = "passed_date")
     private Date passedDate;
 
+
     @Builder
     public Pet(User user, Species species, PetRequestDto requestDto){
         this.user = user;
@@ -69,7 +68,7 @@ public class Pet extends BaseTimeEntity{
         this.routine = requestDto.getRoutine();
         this.favoriteSnack = requestDto.getFavoriteSnack();
         this.favoriteTime = requestDto.getFavoriteTime();
-        this.image = requestDto.getImage();
+        this.petProfile = requestDto.getPetImage();
         this.passedDate = requestDto.getPassedDate();
     }
 }

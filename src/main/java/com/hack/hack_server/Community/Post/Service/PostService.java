@@ -3,9 +3,11 @@ package com.hack.hack_server.Community.Post.Service;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.Comment;
 import com.hack.hack_server.Entity.Post;
+import com.hack.hack_server.Entity.PostImage;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.Community.Post.Dto.*;
 import com.hack.hack_server.Repository.CommentRepository;
+import com.hack.hack_server.Repository.PostImageRepository;
 import com.hack.hack_server.Repository.PostRepository;
 import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final PostImageRepository postImageRepository;
     private final CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
@@ -47,6 +49,9 @@ public class PostService {
         List<Comment> commentList = commentRepository.findByPost_Id(postId);
         List<CommentDto> commentDtos = commentList.stream().map(CommentDto::new).collect(Collectors.toList());
 
+        List<PostImage> imageList = postImageRepository.findPostImageByPost_Id(postId);
+        List<PostImageDto> postImageDtos = imageList.stream().map(PostImageDto::new).collect(Collectors.toList());
+
         PostDetailResponseDto responseDto = PostDetailResponseDto.builder()
                 .userId(principalDetails.getUser().getId())
                 .writerId(post.getUser().getId())
@@ -55,6 +60,7 @@ public class PostService {
                 .likecount(post.getLikecount())
                 .profileImage(post.getUser().getProfileImage())
                 .commentList(commentDtos)
+                .imageList(postImageDtos)
                 .build();
         return responseDto;
     }
@@ -92,6 +98,15 @@ public class PostService {
                 .content(requestDto.getContent())
                 .build();
         postRepository.save(post);
+        for(int i=0;i<requestDto.getImageList().size();i++){
+            PostImageRequestDto p = requestDto.getImageList().get(i);
+
+            PostImage img = PostImage.builder()
+                    .post(post)
+                    .imageUrl(p.getImageUrl())
+                    .build();
+            postImageRepository.save(img);
+        }
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }

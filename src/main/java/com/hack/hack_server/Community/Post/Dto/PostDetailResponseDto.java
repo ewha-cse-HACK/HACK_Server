@@ -17,4 +17,6 @@ public class PostDetailResponseDto {
     private int likecount;
     private String profileImage;
     private List<CommentDto> commentList;
+    private int imageNumber;
+    private List<PostImageDto> imageList;
 }
