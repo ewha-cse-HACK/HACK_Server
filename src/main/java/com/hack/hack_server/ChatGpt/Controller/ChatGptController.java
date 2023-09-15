@@ -5,6 +5,7 @@ import com.hack.hack_server.ChatGpt.Dto.ChatGptAnswerResponseDto;
 import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
 import com.hack.hack_server.ChatGpt.Service.ChatGptService;
 import com.hack.hack_server.ChatGpt.Dto.ChatGptResponseDto;
+import com.theokanning.openai.service.OpenAiService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
