@@ -61,6 +61,7 @@ public class PostService {
                 .profileImage(post.getUser().getProfileImage())
                 .commentList(commentDtos)
                 .imageList(postImageDtos)
+                .imageNumber(postImageDtos.size())
                 .build();
         return responseDto;
     }
