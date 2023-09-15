@@ -29,7 +29,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     // 인증이나 권한이 필요한 주소 요청이 있을 때 해당 필터를 통과한다.
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String jwtHeader = request.getHeader("Authorization");
+        String jwtHeader = request.getHeader("X-ACCESS-TOKEN");
 
         // header가 있는지 확인
         if (jwtHeader == null || !jwtHeader.startsWith("Bearer ")) {
@@ -39,7 +39,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         // JWT 토큰을 검증하여 정상적인 사용자인지 확인
-        String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
+        String jwtToken = request.getHeader("X-ACCESS-TOKEN").replace("Bearer ","");
         User tokenUser = jwtProvider.validToken(jwtToken);
         if( tokenUser != null){
             PrincipalDetails principalDetails = new PrincipalDetails(tokenUser);
