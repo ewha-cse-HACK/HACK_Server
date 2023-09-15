@@ -56,26 +56,26 @@ public class S3Uploader {
         return preSignedURL;
     }
 
-    private String upload(File uploadFile, String dirName){
-        String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();
-        String uploadImageUrl = putS3(uploadFile, fileName);
-        removeImage(uploadFile);
-        return uploadImageUrl;
-    }
+//    private String upload(File uploadFile, String dirName){
+//        String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();
+//        String uploadImageUrl = putS3(uploadFile, fileName);
+//        removeImage(uploadFile);
+//        return uploadImageUrl;
+//    }
 
-    private String putS3(File uploadFile, String fileName){
-        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
-        log.info("File Upload : " + fileName);
-        return amazonS3Client.getUrl(bucket, fileName).toString();
-    }
+//    private String putS3(File uploadFile, String fileName){
+//        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+//        log.info("File Upload : " + fileName);
+//        return amazonS3Client.getUrl(bucket, fileName).toString();
+//    }
 
 
-    private void removeImage(File targetFile){
-        if (targetFile.delete()){
-            log.info("File delete success");
-            return;
-        }
-        log.info("File delete fail");
-    }
+//    private void removeImage(File targetFile){
+//        if (targetFile.delete()){
+//            log.info("File delete success");
+//            return;
+//        }
+//        log.info("File delete fail");
+//    }
 
 }
