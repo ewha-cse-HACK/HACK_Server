@@ -6,6 +6,7 @@ import com.hack.hack_server.Entity.Post;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.Community.Post.Dto.*;
 import com.hack.hack_server.Repository.CommentRepository;
+import com.hack.hack_server.Repository.PostImageRepository;
 import com.hack.hack_server.Repository.PostRepository;
 import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final PostImageRepository postImageRepository;
     private final CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
