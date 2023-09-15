@@ -20,6 +20,7 @@ public class Journal extends BaseTimeEntity{
     @Column(name = "journal_id")
     private Long id;
 
+    @Column(columnDefinition = "LONGTEXT")
     //그림 일기
     private String image;
 

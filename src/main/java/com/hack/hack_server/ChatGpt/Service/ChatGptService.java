@@ -3,15 +3,19 @@ package com.hack.hack_server.ChatGpt.Service;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.ChatGpt.Dto.*;
 import com.hack.hack_server.ChatGpt.ChatGptConfig;
+import com.hack.hack_server.Dalle.Service.AIService;
 import com.hack.hack_server.Entity.*;
 import com.hack.hack_server.Repository.CharactersMappingRepository;
 import com.hack.hack_server.Repository.CharactersRepository;
 import com.hack.hack_server.Repository.JournalRepository;
 import com.hack.hack_server.Repository.PetRepository;
+import com.theokanning.openai.image.CreateImageRequest;
+import com.theokanning.openai.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ public class ChatGptService {
     private final CharactersRepository charactersRepository;
     private final CharactersMappingRepository mappingRepository;
     private final JournalRepository journalRepository;
+    private final AIService aiService;
 
     @Value("${api-key.chat-gpt}")
     private String apiKey;
@@ -90,7 +95,7 @@ public class ChatGptService {
     }
 
 
-    //[기능: 일기 훔쳐보기에서의 '일기' 생성]
+    // main 기능 #2: 일기 훔쳐보기
     public ChatGptAnswerResponseDto generateJournal(Long petId, PrincipalDetails principalDetails){
         User user = principalDetails.getUser();
         Pet pet = petRepository.findById(petId)
@@ -105,7 +110,7 @@ public class ChatGptService {
         /*페르소나 반영*/
         messages.add(MessageRequestDto.builder()
                 .role(ChatGptConfig.SYSTEM_ROLE)
-                .content("You are a pet. Please write a paragraph of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal." +
+                .content("You are a pet. Please write 1-2 sentence of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal." +
                         "The tone of the journal: "+ charOne.getType() + "하고" + charTwo.getType() + "하게" +
                         "1. Your favorite place:" + pet.getFavoritePlace() + "2. Your favorite play:" + pet.getFavoritePlay() + "3. Your habit:" + pet.getHabit()
                         + "4. Your routine:" + pet.getRoutine() + "5. Your favorite snack:" + pet.getFavoriteSnack() + "6. Your favorite time:" + pet.getFavoriteTime())
@@ -116,10 +121,10 @@ public class ChatGptService {
         ChatGptResponseDto responseDto =  this.getResponse(this.buildHttpEntity(new ChatGptRequestDto(
                 ChatGptConfig.MODEL,
                 messages,
-                ChatGptConfig.MAX_TOKEN + 200,
+                ChatGptConfig.MAX_TOKEN,
                 ChatGptConfig.TEMPERATURE,
                 ChatGptConfig.TOP_P)));
-        //max_token + 200 = 500
+        //max_token: 300
 
         //* * * GPT가 생성한 일기 내용 저장 * * *
         /*일기 객체 생성*/
@@ -127,6 +132,7 @@ public class ChatGptService {
                 .user(user)
                 .pet(pet)
                 .content(responseDto.getChoices().get(0).getMessage().getContent())
+                .image(aiService.generatePicture(responseDto.getChoices().get(0).getMessage().getContent()))
                 .build();
         journalRepository.save(journal);
 
