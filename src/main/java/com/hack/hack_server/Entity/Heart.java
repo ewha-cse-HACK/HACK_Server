@@ -1,10 +1,7 @@
 package com.hack.hack_server.Entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 @DynamicInsert
@@ -25,4 +22,9 @@ public class Heart {
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private Post post;
 
+    @Builder
+    public Heart(User user, Post post){
+        this.user = user;
+        this.post = post;
+    }
 }

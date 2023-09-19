@@ -15,6 +15,7 @@ public class PostDetailResponseDto {
     private String nickname;
     private String content;
     private int likecount;
+    private int viewcount;
     private String profileImage;
     private List<CommentDto> commentList;
     private int imageNumber;

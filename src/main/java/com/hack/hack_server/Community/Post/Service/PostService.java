@@ -1,15 +1,9 @@
 package com.hack.hack_server.Community.Post.Service;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
-import com.hack.hack_server.Entity.Comment;
-import com.hack.hack_server.Entity.Post;
-import com.hack.hack_server.Entity.PostImage;
-import com.hack.hack_server.Entity.User;
+import com.hack.hack_server.Entity.*;
 import com.hack.hack_server.Community.Post.Dto.*;
-import com.hack.hack_server.Repository.CommentRepository;
-import com.hack.hack_server.Repository.PostImageRepository;
-import com.hack.hack_server.Repository.PostRepository;
-import com.hack.hack_server.Repository.UserRepository;
+import com.hack.hack_server.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +21,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final PostImageRepository postImageRepository;
     private final CommentRepository commentRepository;
+    private final HeartRepository heartRepository;
 
     @Transactional(readOnly = true)
     public PostListResponseDto findAllPost(Pageable pageable){
@@ -58,6 +53,7 @@ public class PostService {
                 .nickname(post.getUser().getNickname())
                 .content(post.getContent())
                 .likecount(post.getLikecount())
+                .viewcount(post.getViewcount())
                 .profileImage(post.getUser().getProfileImage())
                 .commentList(commentDtos)
                 .imageList(postImageDtos)
@@ -130,5 +126,22 @@ public class PostService {
     }
 
     @Transactional
-    public ResponseEntity
+    public ResponseEntity toggleHeart(PrincipalDetails principalDetails, Long post_id){
+        Post post = postRepository.findById(post_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다: " + post_id));
+        User user = principalDetails.getUser();
+        if (heartRepository.existsByUserAndPost(user, post) == false){  //좋아요 테이블에 없으면
+            post.setLikecount(post.getLikecount() + 1);
+            Heart heart = Heart.builder()
+                    .post(post)
+                    .user(user)
+                    .build();
+            heartRepository.save(heart);
+        }else{
+            post.setLikecount(post.getLikecount() - 1);
+            heartRepository.deleteByUserAndPost(user, post);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
