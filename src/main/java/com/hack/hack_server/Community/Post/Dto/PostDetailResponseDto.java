@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -17,6 +19,7 @@ public class PostDetailResponseDto {
     private int likecount;
     private int viewcount;
     private boolean islike;
+    private LocalDate createdDate;
     private String profileImage;
     private List<CommentDto> commentList;
     private int imageNumber;

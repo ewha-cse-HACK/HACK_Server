@@ -55,6 +55,7 @@ public class PostService {
                 .likecount(post.getLikecount())
                 .viewcount(post.getViewcount())
                 .islike(heartRepository.existsByUserAndPost(principalDetails.getUser(), post))
+                .createdDate(post.getCreatedTime().toLocalDate())
                 .profileImage(post.getUser().getProfileImage())
                 .commentList(commentDtos)
                 .imageList(postImageDtos)
