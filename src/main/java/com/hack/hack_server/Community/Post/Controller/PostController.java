@@ -54,4 +54,9 @@ public class PostController {
     public ResponseEntity savePost(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PostAddRequestDto requestDto){
         return postService.savePost(principalDetails, requestDto);
     }
+
+    @PostMapping("/{post_id}/heart")
+    public ResponseEntity toggleHeart(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long post_id){
+
+    }
 }

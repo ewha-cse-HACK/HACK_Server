@@ -128,4 +128,7 @@ public class PostService {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+    @Transactional
+    public ResponseEntity
 }
