@@ -4,7 +4,7 @@ import com.hack.hack_server.Entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
@@ -14,7 +14,7 @@ public class PostResponseDto {
     private String title;
     private int likecount;
     private int viewcount;
-    private Date createdDate;
+    private LocalDate createdDate;
 
     public PostResponseDto(Post post){
         this.id = post.getId();
@@ -22,6 +22,6 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.likecount = post.getLikecount();
         this.viewcount = post.getViewcount();
-        this.createdDate = java.sql.Timestamp.valueOf(post.getCreatedTime());
+        this.createdDate = post.getCreatedTime().toLocalDate();
     }
 }
