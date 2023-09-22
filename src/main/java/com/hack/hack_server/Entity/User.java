@@ -33,9 +33,10 @@ public class User extends BaseTimeEntity{
     private String roles;
 
     @Column(name = "profile_image")
+    @Setter
     private String profileImage;
 
-    public void updateProfileImage(String profileImage){
+    public void updateProfile(String profileImage){
         this.profileImage = profileImage;
     }
 
