@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
+
 @Configuration
 public class ServicesConfig {
     @Value("${app.openai.api}")
@@ -13,6 +15,8 @@ public class ServicesConfig {
 
     @Bean
     public OpenAiService getOpenAiService() {
-        return new OpenAiService(apiKey);
+        //socket timeout ERROR 해결:
+        return new OpenAiService(apiKey, Duration.ofSeconds(30));
+//        return new OpenAiService(apiKey);
     }
 }

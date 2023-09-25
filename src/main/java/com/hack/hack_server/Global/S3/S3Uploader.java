@@ -5,14 +5,20 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.Headers;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.UUID;
@@ -27,6 +33,12 @@ public class S3Uploader {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
+
+    @Value("${cloud.aws.credentials.access-key}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secret-key}")
+    private String secretKey;
 
     public String getPreSignedURL(String dirname){
         String preSignedURL = "";
@@ -76,6 +88,19 @@ public class S3Uploader {
             return;
         }
         log.info("File delete fail");
+    }
+
+
+    //멀티파트 파일 s3에 직접 업로드
+    public String saveFile(MultipartFile multipartFile) throws IOException {
+        String originalFilename = multipartFile.getName();
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
+        amazonS3Client.putObject(bucket, multipartFile.getName(), multipartFile.getInputStream(), metadata);
+        return amazonS3Client.getUrl(bucket, originalFilename).toString();
     }
 
 }
