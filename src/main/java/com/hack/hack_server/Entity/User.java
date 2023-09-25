@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@DynamicInsert
+//@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Getter
 @Entity
 public class User extends BaseTimeEntity{
@@ -33,7 +32,6 @@ public class User extends BaseTimeEntity{
     private String roles;
 
     @Column(name = "profile_image")
-    @Setter
     private String profileImage;
 
     public void updateProfile(String profileImage){

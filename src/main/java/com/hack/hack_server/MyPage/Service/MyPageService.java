@@ -4,15 +4,18 @@ import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.MyPage.Dto.MyPageRequestDto;
 import com.hack.hack_server.MyPage.Dto.ProfileImageModifyRequestDto;
+import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
 public class MyPageService {
+    private final UserRepository userRepository;
 
     @Transactional
     public MyPageRequestDto getMyInfo(PrincipalDetails principalDetails){
@@ -30,7 +33,8 @@ public class MyPageService {
     public ResponseEntity deleteProfileImage(PrincipalDetails principalDetails){
         User user = principalDetails.getUser();
 
-        user.setProfileImage("");    //프로필의 기본이미지 넣기
+        user.updateProfile(null);
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
@@ -39,8 +43,8 @@ public class MyPageService {
     public ResponseEntity modifyProfileImage(PrincipalDetails principalDetails, ProfileImageModifyRequestDto requestDto){
         User user = principalDetails.getUser();
 
-//        user.setProfileImage(requestDto.getProfileImage());
         user.updateProfile(requestDto.getProfileImage());
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
