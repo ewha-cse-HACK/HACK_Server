@@ -153,7 +153,6 @@ public class ChatGptService {
     }
 
 
-    // DALL-E가 생성한 그림일기 저장 후 byte[] 형태로 return!
     public int generateImage(Long petId, PrincipalDetails principalDetails, String image, Long jourId){
 //        Journal journal = journalRepository.findByPetAndOwnerId(petId, principalDetails.getUser().getId()); //ERROR: not unique result
         Journal journal = journalRepository.findById(jourId)
