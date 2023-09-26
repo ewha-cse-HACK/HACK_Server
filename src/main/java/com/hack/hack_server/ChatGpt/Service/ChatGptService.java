@@ -5,6 +5,7 @@ import com.hack.hack_server.ChatGpt.Dto.*;
 import com.hack.hack_server.ChatGpt.ChatGptConfig;
 import com.hack.hack_server.Dalle.Service.AIService;
 import com.hack.hack_server.Entity.*;
+import com.hack.hack_server.Global.S3.S3Uploader;
 import com.hack.hack_server.Repository.CharactersMappingRepository;
 import com.hack.hack_server.Repository.CharactersRepository;
 import com.hack.hack_server.Repository.JournalRepository;
@@ -12,14 +13,25 @@ import com.hack.hack_server.Repository.PetRepository;
 import com.theokanning.openai.image.CreateImageRequest;
 import com.theokanning.openai.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.mock.web.MockMultipartFile;
 
+
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +41,6 @@ public class ChatGptService {
     private final CharactersRepository charactersRepository;
     private final CharactersMappingRepository mappingRepository;
     private final JournalRepository journalRepository;
-    private final AIService aiService;
 
     @Value("${api-key.chat-gpt}")
     private String apiKey;
@@ -95,8 +106,8 @@ public class ChatGptService {
     }
 
 
-    // main 기능 #2: 일기 훔쳐보기
-    public ChatGptAnswerResponseDto generateJournal(Long petId, PrincipalDetails principalDetails){
+    // main 기능 #2: 일기 훔쳐보기 -> 일기(chatGPT 생성)
+    public DalleAnswerResponseDto generateJournal(Long petId, PrincipalDetails principalDetails){
         User user = principalDetails.getUser();
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(()-> new IllegalArgumentException("pet_id 오류: " + petId));
@@ -110,7 +121,7 @@ public class ChatGptService {
         /*페르소나 반영*/
         messages.add(MessageRequestDto.builder()
                 .role(ChatGptConfig.SYSTEM_ROLE)
-                .content("You are a pet. Please write 1-2 sentence of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal." +
+                .content("You are a pet. Please write 1 sentence of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal." +
                         "The tone of the journal: "+ charOne.getType() + "하고" + charTwo.getType() + "하게" +
                         "1. Your favorite place:" + pet.getFavoritePlace() + "2. Your favorite play:" + pet.getFavoritePlay() + "3. Your habit:" + pet.getHabit()
                         + "4. Your routine:" + pet.getRoutine() + "5. Your favorite snack:" + pet.getFavoriteSnack() + "6. Your favorite time:" + pet.getFavoriteTime())
@@ -126,17 +137,29 @@ public class ChatGptService {
                 ChatGptConfig.TOP_P)));
         //max_token: 300
 
+
         //* * * GPT가 생성한 일기 내용 저장 * * *
         /*일기 객체 생성*/
         Journal journal = Journal.builder()
                 .user(user)
                 .pet(pet)
                 .content(responseDto.getChoices().get(0).getMessage().getContent())
-                .image(aiService.generatePicture(responseDto.getChoices().get(0).getMessage().getContent()))
                 .build();
         journalRepository.save(journal);
 
-        return new ChatGptAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent());
+        Long journalId = journal.getId();
+
+        return new DalleAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent(), journalId);
+    }
+
+
+    // DALL-E가 생성한 그림일기 저장 후 byte[] 형태로 return!
+    public int generateImage(Long petId, PrincipalDetails principalDetails, String image, Long jourId){
+//        Journal journal = journalRepository.findByPetAndOwnerId(petId, principalDetails.getUser().getId()); //ERROR: not unique result
+        Journal journal = journalRepository.findById(jourId)
+                .orElseThrow(()-> new IllegalArgumentException("journal Id 오류"));
+        journalRepository.updateImage(journal.getId(), image); //그림일기 생성 후 저장
+        return 1;
     }
 
 
@@ -161,5 +184,7 @@ public class ChatGptService {
 
         return new ChatGptAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent());
     }
+
+
 
 }
