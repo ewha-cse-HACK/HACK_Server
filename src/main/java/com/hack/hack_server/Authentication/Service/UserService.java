@@ -67,7 +67,7 @@ public class UserService {
             String authenticatedEmail = principalDetails.getUser().getEmail();
             String authenticatedUsername = principalDetails.getUser().getNickname();
 
-            return "로그인 성공 " + jwtProvider.generateJwtToken(authenticatedId, authenticatedEmail, authenticatedUsername);
+            return jwtProvider.generateJwtToken(authenticatedId, authenticatedEmail, authenticatedUsername);
         }
 
 
