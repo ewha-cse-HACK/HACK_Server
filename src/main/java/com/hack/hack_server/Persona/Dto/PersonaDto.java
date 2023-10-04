@@ -8,8 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PersonaDto {
     private String name;
+    private Long petId;
 
     public PersonaDto(Pet pet){
         this.name = pet.getName();
+        this.petId = pet.getId();
     }
 }
