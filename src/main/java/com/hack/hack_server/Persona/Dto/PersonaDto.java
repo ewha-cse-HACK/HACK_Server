@@ -9,9 +9,11 @@ import lombok.Getter;
 public class PersonaDto {
     private String name;
     private Long petId;
+    private String petProfile;
 
     public PersonaDto(Pet pet){
         this.name = pet.getName();
         this.petId = pet.getId();
+        this.petProfile = pet.getPetProfile();
     }
 }
