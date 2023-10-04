@@ -8,9 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
-    Pet findByUserId(Long id);
+//    Pet findByUserId(Long id);
+    List<Pet> findByUser_Id(Long userId);
 
 //    @Transactional
 //    @Modifying

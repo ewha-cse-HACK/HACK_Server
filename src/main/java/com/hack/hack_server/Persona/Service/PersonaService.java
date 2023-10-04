@@ -2,6 +2,8 @@ package com.hack.hack_server.Persona.Service;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.*;
+import com.hack.hack_server.Persona.Dto.PersonaDto;
+import com.hack.hack_server.Persona.Dto.PersonaListRequestDto;
 import com.hack.hack_server.Persona.Dto.PetRequestDto;
 import com.hack.hack_server.Repository.*;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +69,18 @@ public class PersonaService {
                 .build();
         mappingRepository.save(charMapTwo);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @Transactional
+    public PersonaListRequestDto findPersonaList(PrincipalDetails principalDetails){
+        User user = principalDetails.getUser();
+        List<Pet> petList = petRepository.findByUser_Id(user.getId());
+        List<PersonaDto> personaDtos = petList.stream().map(PersonaDto::new).collect(Collectors.toList());
+        PersonaListRequestDto requestDto = PersonaListRequestDto.builder()
+                .personaList(personaDtos)
+                .listSize(personaDtos.size())
+                .build();
+        return requestDto;
     }
 
 }

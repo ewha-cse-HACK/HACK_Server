@@ -1,16 +1,14 @@
 package com.hack.hack_server.Persona.Controller;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
+import com.hack.hack_server.Persona.Dto.PersonaListRequestDto;
 import com.hack.hack_server.Persona.Dto.PetRequestDto;
 import com.hack.hack_server.Persona.Dto.SpeciesRequestDto;
 import com.hack.hack_server.Persona.Service.PersonaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("rainbow-letter/persona")
@@ -21,6 +19,11 @@ public class PersonaController {
     @PostMapping("/save")
     public ResponseEntity savePersona(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody PetRequestDto requestDto){
         return personaService.savePetInfo(principalDetails, requestDto);
+    }
+
+    @GetMapping("/list")
+    public PersonaListRequestDto getPersonaList(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        return personaService.findPersonaList(principalDetails);
     }
 
 
