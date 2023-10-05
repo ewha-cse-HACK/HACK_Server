@@ -1,5 +1,6 @@
 package com.hack.hack_server.Dalle.Controller;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.ChatGpt.Dto.DalleAnswerResponseDto;
 import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
 
 @RestController
 @RequestMapping("/journal")
@@ -68,7 +70,7 @@ public class ImageGeneratorController {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
 
             // Create an MultipartFile object
-            MultipartFile multipartFile = new MockMultipartFile("그림 일기", byteArrayInputStream.readAllBytes());
+            MultipartFile multipartFile = new MockMultipartFile(String.valueOf(jourId), byteArrayInputStream.readAllBytes()); //파일명은 journal_id로 저장!
 
             s3Uploader.saveFile(multipartFile); //s3에 멀티파트 파일로 직접 업로드! => ok.
 
@@ -78,7 +80,14 @@ public class ImageGeneratorController {
         return new ResponseEntity<>(img, HttpStatus.OK);
     }
 
-
+    //저장된 그림일기 이미지 'url'을 S3에서 받아오는 api
+    private final AmazonS3 s3Client;
+    @GetMapping("/image/{journal_id}")
+    public String getMember(@PathVariable Long journal_id) {
+        URL url = s3Client.getUrl("hack-s3bucket", Long.toString(journal_id));
+        String urltext = ""+url;
+        return urltext;
+    }
 
     //chatGPT & papago api 테스트
     @PostMapping("/{pet_id}")
