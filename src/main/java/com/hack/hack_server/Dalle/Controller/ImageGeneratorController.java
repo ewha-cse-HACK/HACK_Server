@@ -100,7 +100,7 @@ public class ImageGeneratorController {
         } catch (IOException e) {
         }
 
-        return new ResponseEntity<>(img, HttpStatus.OK);
+        return new ResponseEntity<>(jourId, HttpStatus.OK);
     }
 
 
