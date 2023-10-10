@@ -76,6 +76,7 @@ public class PostService {
         postImageRepository.deletePostImageByPost_Id(post_id);
 
         if (requestDto.getImageList() != null){
+            post.setThumbnail(requestDto.getImageList().get(0).getImageUrl().toString());
             for(int i=0;i<requestDto.getImageList().size();i++) {
                 PostImageDto p = requestDto.getImageList().get(i);
 
@@ -113,7 +114,8 @@ public class PostService {
         postRepository.save(post);
 
         if (requestDto.getImageList() != null){
-            for(int i=0;i<requestDto.getImageList().size();i++){
+            post.setThumbnail(requestDto.getImageList().get(0).getImageUrl().toString());
+            for(int i=0;i<requestDto.getImageList().size();i++) {
                 PostImageDto p = requestDto.getImageList().get(i);
 
                 PostImage img = PostImage.builder()

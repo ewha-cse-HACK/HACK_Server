@@ -33,6 +33,10 @@ public class Post extends BaseTimeEntity{
     @Setter
     private boolean isDel;
 
+    @Column(name = "thumbnail")
+    @Setter
+    private String thumbnail;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
