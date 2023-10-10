@@ -20,5 +20,7 @@ public class PetRequestDto {
     private String routine;
     private String petImage;
     private Date passedDate;
+    private String furColor;
+    private String kind;
 
 }

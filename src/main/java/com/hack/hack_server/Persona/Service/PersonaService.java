@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 public class PersonaService {
     private final PetRepository petRepository;
     private final SpeciesRepository speciesRepository;
-    private final CharactersRepository charactersRepository;
-    private final CharactersMappingRepository mappingRepository;
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
@@ -52,22 +50,21 @@ public class PersonaService {
 
         petRepository.save(pet);
 
-
-        /*성격 저장*/
-        Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
-        Characters charTwo = charactersRepository.findCharactersByType(requestDto.getCharTwo());
-
-        CharactersMapping charMapOne = CharactersMapping.builder()
-                .pet(pet)
-                .character(charOne)
-                .build();
-        mappingRepository.save(charMapOne);
-
-        CharactersMapping charMapTwo = CharactersMapping.builder()
-                .pet(pet)
-                .character(charTwo)
-                .build();
-        mappingRepository.save(charMapTwo);
+//        /*성격 저장*/
+//        Characters charOne = charactersRepository.findCharactersByType(requestDto.getCharOne());
+//        Characters charTwo = charactersRepository.findCharactersByType(requestDto.getCharTwo());
+//
+//        CharactersMapping charMapOne = CharactersMapping.builder()
+//                .pet(pet)
+//                .character(charOne)
+//                .build();
+//        mappingRepository.save(charMapOne);
+//
+//        CharactersMapping charMapTwo = CharactersMapping.builder()
+//                .pet(pet)
+//                .character(charTwo)
+//                .build();
+//        mappingRepository.save(charMapTwo);
         return new ResponseEntity(HttpStatus.OK);
     }
 

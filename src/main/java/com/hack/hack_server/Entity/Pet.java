@@ -55,6 +55,18 @@ public class Pet extends BaseTimeEntity{
     @Column(name = "passed_date")
     private Date passedDate;
 
+    @Column(name = "charac_one")
+    private String characOne;
+
+    @Column(name = "charac_two")
+    private String characTwo;
+
+    @Column(name = "kind")
+    private String kind;
+
+    @Column(name = "fur_color")
+    private String furColor;
+
 
     @Builder
     public Pet(User user, Species species, PetRequestDto requestDto){
@@ -70,5 +82,9 @@ public class Pet extends BaseTimeEntity{
         this.favoriteTime = requestDto.getFavoriteTime();
         this.petProfile = requestDto.getPetImage();
         this.passedDate = requestDto.getPassedDate();
+        this.kind = requestDto.getKind();
+        this.furColor = requestDto.getFurColor();
+        this.characOne = requestDto.getCharOne();
+        this.characTwo = requestDto.getCharTwo();
     }
 }
