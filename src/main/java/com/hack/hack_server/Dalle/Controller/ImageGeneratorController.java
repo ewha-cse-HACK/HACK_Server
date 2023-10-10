@@ -6,7 +6,10 @@ import com.hack.hack_server.ChatGpt.Dto.DalleAnswerResponseDto;
 import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
 import com.hack.hack_server.ChatGpt.Service.ChatGptService;
 //import com.hack.hack_server.ChatGpt.Service.MockMultipartFile;
+import com.hack.hack_server.Dalle.Dto.JournalResponseDto;
 import com.hack.hack_server.Dalle.Service.AIService;
+import com.hack.hack_server.Dalle.Service.JournalService;
+import com.hack.hack_server.Entity.Journal;
 import com.hack.hack_server.Global.S3.S3Uploader;
 import com.hack.hack_server.Papago.NaverTransService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/journal")
@@ -34,6 +38,25 @@ public class ImageGeneratorController {
     private final NaverTransService naverTransService;
     private final ChatGptService chatGptService;
     private final S3Uploader s3Uploader;
+
+    //S3 이미지 조회 test용
+//    //저장된 그림일기 이미지 'url'을 S3에서 받아오는 api
+//    private final AmazonS3 s3Client;
+//    @GetMapping("/image/{journal_id}")
+//    public String getMember(@PathVariable Long journal_id) {
+//        URL url = s3Client.getUrl("hack-s3bucket", Long.toString(journal_id));
+//        String urltext = ""+url;
+//        return urltext;
+//    }
+
+
+    private final JournalService journalService;
+
+    //그림일기 1개 정보 조회
+    @GetMapping("/{journal_id}")
+    public ResponseEntity<?> getJournal(@PathVariable Long journal_id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return journalService.getResponse(journal_id, principalDetails);
+    }
 
 
     //메인 기능: 그림일기(글+그림) 생성 후 s3에 저장
@@ -80,14 +103,6 @@ public class ImageGeneratorController {
         return new ResponseEntity<>(img, HttpStatus.OK);
     }
 
-    //저장된 그림일기 이미지 'url'을 S3에서 받아오는 api
-    private final AmazonS3 s3Client;
-    @GetMapping("/image/{journal_id}")
-    public String getMember(@PathVariable Long journal_id) {
-        URL url = s3Client.getUrl("hack-s3bucket", Long.toString(journal_id));
-        String urltext = ""+url;
-        return urltext;
-    }
 
     //chatGPT & papago api 테스트
     @PostMapping("/{pet_id}")
