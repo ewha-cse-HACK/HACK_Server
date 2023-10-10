@@ -82,5 +82,9 @@ public class Pet extends BaseTimeEntity{
         this.favoriteTime = requestDto.getFavoriteTime();
         this.petProfile = requestDto.getPetImage();
         this.passedDate = requestDto.getPassedDate();
+        this.kind = requestDto.getKind();
+        this.furColor = requestDto.getFurColor();
+        this.characOne = requestDto.getCharOne();
+        this.characTwo = requestDto.getCharTwo();
     }
 }
