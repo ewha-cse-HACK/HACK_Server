@@ -6,6 +6,8 @@ import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Authentication.Service.UserService;
 import com.hack.hack_server.Entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/health")
+    public ResponseEntity<?> getJournal() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @PostMapping("/api/join")
     public String join(@RequestBody JoinRequestDto joinRequestDto) {
