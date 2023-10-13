@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
     @GetMapping("/health")
@@ -23,17 +24,17 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/api/join")
+    @PostMapping("/join")
     public String join(@RequestBody JoinRequestDto joinRequestDto) {
         return userService.join(joinRequestDto);
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginRequestDto loginRequestDto) {
         return userService.login(loginRequestDto);
     }
 
-    @GetMapping("/api/info")
+    @GetMapping("/info")
     public User userInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, Authentication authentication) {
         User user = principalDetails.getUser();
         return user;
