@@ -67,7 +67,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3001");
         configuration.addAllowedOrigin("http://localhost:3000");
-        configuration.addAllowedOrigin("https://rainbow-letter-fz1ok9p7s-ehvzmfs-projects.vercel.app");
+        configuration.addAllowedOrigin("https://rainbow-letter-8kxm7qcwg-ehvzmfs-projects.vercel.app");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
