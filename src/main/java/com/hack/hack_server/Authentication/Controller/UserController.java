@@ -29,7 +29,7 @@ public class UserController {
         return userService.join(joinRequestDto);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public String login(@RequestBody LoginRequestDto loginRequestDto) {
         return userService.login(loginRequestDto);
     }
