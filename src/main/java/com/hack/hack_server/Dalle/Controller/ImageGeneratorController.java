@@ -4,13 +4,18 @@ import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.ChatGpt.Dto.DalleAnswerResponseDto;
 import com.hack.hack_server.ChatGpt.Service.ChatGptService;
 //import com.hack.hack_server.ChatGpt.Service.MockMultipartFile;
+import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
 import com.hack.hack_server.Dalle.Dto.JournalCommentDto;
+import com.hack.hack_server.Dalle.Dto.JournalListResponseDto;
 import com.hack.hack_server.Dalle.Service.AIService;
 import com.hack.hack_server.Dalle.Service.JournalService;
 import com.hack.hack_server.Global.S3.S3Uploader;
 import com.hack.hack_server.Papago.NaverTransService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
@@ -45,6 +50,14 @@ public class ImageGeneratorController {
 
 
     private final JournalService journalService;
+
+    //그림일기 목록 조회
+    @GetMapping("/{pet_id}/list")
+    public JournalListResponseDto getAllJournal(@RequestParam(value = "page", defaultValue = "1", required = false) int page, @PathVariable Long pet_id, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("created_time").descending());
+        return journalService.findAllJournal(pet_id, pageable, principalDetails);
+    }
+
 
     //그림일기 1개 정보 조회
     @GetMapping("/{journal_id}")

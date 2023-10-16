@@ -2,6 +2,9 @@ package com.hack.hack_server.Repository;
 
 import com.hack.hack_server.Entity.Journal;
 import com.hack.hack_server.Entity.Pet;
+import com.hack.hack_server.Entity.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +26,7 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "update journal j set j.image=:image where journal_id=:journal_id")
     int updateImage(@Param("journal_id") Long journalId, @Param("image") String image);
+
+    @Query(nativeQuery = true, value = "select * from journal where pet_id=:pet_id")
+    Page<Journal> findAllByPet_Id(Pageable pageable, @Param("pet_id") Long petId);
 }

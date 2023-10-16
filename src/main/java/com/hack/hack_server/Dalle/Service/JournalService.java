@@ -1,17 +1,21 @@
 package com.hack.hack_server.Dalle.Service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.hack.hack_server.Authentication.PrincipalDetails;
-import com.hack.hack_server.Dalle.Dto.JournalCommentDto;
-import com.hack.hack_server.Dalle.Dto.JournalCommentResponseDto;
-import com.hack.hack_server.Dalle.Dto.JournalResponseDto;
+import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
+import com.hack.hack_server.Community.Post.Dto.PostResponseDto;
+import com.hack.hack_server.Dalle.Dto.*;
 import com.hack.hack_server.Entity.JournalComment;
 import com.hack.hack_server.Entity.Journal;
+import com.hack.hack_server.Entity.Post;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.Repository.JournalCommentRepository;
 import com.hack.hack_server.Repository.JournalRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 
@@ -93,4 +97,20 @@ public class JournalService {
 
         return HttpStatus.CREATED;
     }
+
+    //그림일기 목록 조회
+    @Transactional(readOnly = true)
+    public JournalListResponseDto findAllJournal(Long pet_id, Pageable pageable, PrincipalDetails principalDetails){
+        User user = principalDetails.getUser();
+
+        Page<Journal> journals = journalRepository.findAllByPet_Id(pageable, pet_id);
+        Page<JournalListDto> journalListDtos = journals.map(JournalListDto::new);
+        JournalListResponseDto responseDto = JournalListResponseDto.builder()
+                .journalList(journalListDtos.getContent())
+                .currentPage(journalListDtos.getNumber() + 1)
+                .totalPage(journalListDtos.getTotalPages())
+                .build();
+        return responseDto;
+    }
+
 }
