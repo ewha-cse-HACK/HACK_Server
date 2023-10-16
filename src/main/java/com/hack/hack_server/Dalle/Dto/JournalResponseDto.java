@@ -16,11 +16,13 @@ public class JournalResponseDto {
     private LocalDateTime createdTime;
     private String content;
     private String imageUrl;
+    private JournalCommentResponseDto journalCommentResponseDto;
 
-    public JournalResponseDto(Journal journal, String imageUrl){
+    public JournalResponseDto(Journal journal, String imageUrl, JournalCommentResponseDto journalCommentResponseDto){
         this.createdTime = journal.getCreatedTime();
         this.content= journal.getContent();
         this.imageUrl = imageUrl;
+        this.journalCommentResponseDto = journalCommentResponseDto;
     }
 
 }

@@ -1,15 +1,12 @@
 package com.hack.hack_server.Dalle.Controller;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.ChatGpt.Dto.DalleAnswerResponseDto;
-import com.hack.hack_server.ChatGpt.Dto.QuestionRequestDto;
 import com.hack.hack_server.ChatGpt.Service.ChatGptService;
 //import com.hack.hack_server.ChatGpt.Service.MockMultipartFile;
-import com.hack.hack_server.Dalle.Dto.JournalResponseDto;
+import com.hack.hack_server.Dalle.Dto.JournalCommentDto;
 import com.hack.hack_server.Dalle.Service.AIService;
 import com.hack.hack_server.Dalle.Service.JournalService;
-import com.hack.hack_server.Entity.Journal;
 import com.hack.hack_server.Global.S3.S3Uploader;
 import com.hack.hack_server.Papago.NaverTransService;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +16,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import com.hack.hack_server.ChatGpt.Dto.ChatGptAnswerResponseDto;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/journal")
@@ -56,6 +50,12 @@ public class ImageGeneratorController {
     @GetMapping("/{journal_id}")
     public ResponseEntity<?> getJournal(@PathVariable Long journal_id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         return journalService.getResponse(journal_id, principalDetails);
+    }
+
+    //그림일기 댓글 작성
+    @PostMapping("/comment/{journal_id}")
+    public HttpStatus addComment(@PathVariable Long journal_id, @AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody JournalCommentDto journalCommentDto) {
+        return journalService.addComment(journal_id, principalDetails, journalCommentDto);
     }
 
 
