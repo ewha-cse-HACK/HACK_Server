@@ -99,8 +99,8 @@ public class S3Uploader {
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        amazonS3Client.putObject(bucket, multipartFile.getName(), multipartFile.getInputStream(), metadata);
-        return amazonS3Client.getUrl(bucket, originalFilename).toString();
+        amazonS3Client.putObject(bucket + "/그림일기", multipartFile.getName(), multipartFile.getInputStream(), metadata);
+        return amazonS3Client.getUrl(bucket + "/그림일기", originalFilename).toString();
     }
 
 }

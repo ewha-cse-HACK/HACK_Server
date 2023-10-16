@@ -27,7 +27,7 @@ public class JournalService {
         User user = principalDetails.getUser();
 
         //그림일기 이미지 S3에서 조회
-        URL url = s3Client.getUrl("hack-s3bucket", Long.toString(journal_id));
+        URL url = s3Client.getUrl("hack-s3bucket/그림일기", Long.toString(journal_id));
         String imageUrl = ""+url;
 
         //journal_id로 조회!
@@ -42,18 +42,29 @@ public class JournalService {
 
         //comment 추가
         JournalComment comment = journalCommentRepository.findByJournal_Id(journal_id)
-                .orElseThrow(()-> new IllegalArgumentException("journal_id 오류: " + journal_id));
+                .orElse(null);
 
 
+        //comment가 null일 경우 예외처리
+        if (comment != null) {
+            JournalResponseDto journalResponseDto = JournalResponseDto.builder()
+                    .createdTime(journal.getCreatedTime())
+                    .content(journal.getContent())
+                    .imageUrl(imageUrl)
+                    .journalCommentResponseDto(new JournalCommentResponseDto(comment)) //comment
+                    .build();
+            return new ResponseEntity<>(journalResponseDto, HttpStatus.OK);
 
-        JournalResponseDto journalResponseDto = JournalResponseDto.builder()
-                .createdTime(journal.getCreatedTime())
-                .content(journal.getContent())
-                .imageUrl(imageUrl)
-                .journalCommentResponseDto(new JournalCommentResponseDto(comment)) //comment
-                .build();
+        }
 
-        return new ResponseEntity<>(journalResponseDto, HttpStatus.OK);
+            JournalResponseDto journalResponseDto = JournalResponseDto.builder()
+                    .createdTime(journal.getCreatedTime())
+                    .content(journal.getContent())
+                    .imageUrl(imageUrl)
+                    .build();
+
+            return new ResponseEntity<>(journalResponseDto, HttpStatus.OK);
+
     }
 
 
