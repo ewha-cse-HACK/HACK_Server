@@ -78,10 +78,11 @@ public class ImageGeneratorController {
         DalleAnswerResponseDto dalleAnswerResponseDto = chatGptService.generateJournal(pet_id, principalDetails); //chatGPT: 그림일기 생성 (글)
         Long jourId = dalleAnswerResponseDto.getJourId();
         String koJournal = dalleAnswerResponseDto.getAnswer();
+        System.out.println(koJournal);
 
-        String shortKoJour = chatGptService.shortJorunal(koJournal).getAnswer(); //DALL-E에게 전달을 위한 1문장 요약
+//        String shortKoJour = chatGptService.shortJorunal(koJournal).getAnswer(); //DALL-E에게 전달을 위한 1문장 요약
 
-        String img = aiService.generatePicture(naverTransService.getTransSentence(shortKoJour)); // papago를 거쳐 DALL-E를 통해 반환된 b64_json String
+        String img = aiService.generatePicture(naverTransService.getTransSentence(koJournal)); //papago를 거쳐 DALL-E를 통해 반환된 b64_json String
         chatGptService.generateImage(pet_id, principalDetails, img, jourId); //DB에 그림일기 저장!
 
         byte[] image = Base64.decodeBase64(img); //b64 string -> byte[]

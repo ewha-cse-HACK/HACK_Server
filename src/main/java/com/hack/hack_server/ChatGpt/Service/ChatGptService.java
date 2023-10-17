@@ -134,7 +134,25 @@ public class ChatGptService {
 
         Long journalId = journal.getId();
 
-        return new DalleAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent(), journalId);
+        String response = responseDto.getChoices().get(0).getMessage().getContent();
+
+        //DALL-E api 호출시 페르소나 반영
+        String petFur;
+        String prompt;
+        if (pet.getFurColor() == null){
+            prompt = "나는" + pet.getKind() + "종류의" + pet.getSpecies().getSpeciesName() + "야. 내 행동을 그려줘." + response;
+
+        }
+        else
+        {
+            petFur = pet.getFurColor();
+            prompt = "나는" + pet.getKind() + "종류의" + petFur + "털을 가진" + pet.getSpecies().getSpeciesName() + "야. 내 행동을 그려줘." + response;
+
+        }
+        return new DalleAnswerResponseDto(prompt, journalId);
+
+
+        //        return new DalleAnswerResponseDto(responseDto.getChoices().get(0).getMessage().getContent(), journalId);
     }
 
 
