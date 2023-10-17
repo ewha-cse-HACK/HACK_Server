@@ -24,7 +24,7 @@ public class PostController {
     private final PostService postService;
     @GetMapping
     public PostListResponseDto getAllPost(@RequestParam(value = "page", defaultValue = "1", required = false) int page){
-        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(page - 1, 30, Sort.by("id").descending());
         return postService.findAllPost(pageable);
     }
 
