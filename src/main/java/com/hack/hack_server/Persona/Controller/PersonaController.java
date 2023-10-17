@@ -26,5 +26,10 @@ public class PersonaController {
         return personaService.findPersonaList(principalDetails);
     }
 
+    @DeleteMapping("/delete/{pet_id}")
+    public ResponseEntity deletePersona(@PathVariable Long pet_id){
+        return personaService.deletePersona(pet_id);
+    }
+
 
 }
