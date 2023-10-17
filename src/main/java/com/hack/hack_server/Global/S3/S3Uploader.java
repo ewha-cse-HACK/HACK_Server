@@ -97,7 +97,7 @@ public class S3Uploader {
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
-        metadata.setContentType(multipartFile.getContentType());
+        metadata.setContentType("image/jpg");
 
         amazonS3Client.putObject(bucket + "/그림일기", multipartFile.getName(), multipartFile.getInputStream(), metadata);
         return amazonS3Client.getUrl(bucket + "/그림일기", originalFilename).toString();
