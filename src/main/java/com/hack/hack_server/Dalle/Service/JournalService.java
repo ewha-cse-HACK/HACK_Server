@@ -52,6 +52,7 @@ public class JournalService {
         //comment가 null일 경우 예외처리
         if (comment != null) {
             JournalResponseDto journalResponseDto = JournalResponseDto.builder()
+                    .id(journal.getId())
                     .createdTime(journal.getCreatedTime())
                     .content(journal.getContent())
                     .imageUrl(imageUrl)
@@ -62,6 +63,7 @@ public class JournalService {
         }
 
             JournalResponseDto journalResponseDto = JournalResponseDto.builder()
+                    .id(journal.getId())
                     .createdTime(journal.getCreatedTime())
                     .content(journal.getContent())
                     .imageUrl(imageUrl)
