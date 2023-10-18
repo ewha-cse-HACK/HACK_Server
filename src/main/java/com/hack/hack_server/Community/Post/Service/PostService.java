@@ -52,6 +52,7 @@ public class PostService {
                 .writerId(post.getUser().getId())
                 .nickname(post.getUser().getNickname())
                 .content(post.getContent())
+                .title(post.getTitle())
                 .likecount(post.getLikecount())
                 .viewcount(post.getViewcount())
                 .islike(heartRepository.existsByUserAndPost(principalDetails.getUser(), post))
