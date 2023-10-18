@@ -16,6 +16,7 @@ public class PostDetailResponseDto {
     private Long writerId;
     private String nickname;
     private String content;
+    private String title;
     private int likecount;
     private int viewcount;
     private boolean islike;
