@@ -14,7 +14,7 @@ public class PostResponseDto {
     private String title;
     private int likecount;
     private int viewcount;
-    private LocalDate createdDate;
+    private String createdDate;
     private String thumbnail;
 
     public PostResponseDto(Post post){
@@ -23,7 +23,7 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.likecount = post.getLikecount();
         this.viewcount = post.getViewcount();
-        this.createdDate = post.getCreatedTime().toLocalDate();
+        this.createdDate = post.getCreatedTime().toLocalDate().toString();
         this.thumbnail = post.getThumbnail();
     }
 }
