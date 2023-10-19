@@ -58,7 +58,8 @@ public class ChatGptService {
         /*페르소나 설정*/
         messages.add(MessageRequestDto.builder()
                         .role(ChatGptConfig.SYSTEM_ROLE)
-                        .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master. Use informal language")
+                        .content("You are a dead pet. Your master is missing you. Give comfort and warm words to your master. Use informal language"
+                                + "Make a Korean sentence that ends with a period.")
                         .build());
 
         messages.add(MessageRequestDto.builder()
@@ -72,8 +73,7 @@ public class ChatGptService {
                         "Second, answer reflecting given tone. " +
                         "Third, answer me in a friendly tone. " +
                         "Fourth, don't tell me sad things. " +
-                        "Finally, answer from Pet's point of view. " +
-                        "You must make perfect sentence in Korean.")
+                        "Finally, answer from Pet's point of view. " + "Make a Korean sentence that ends with a period")
                 .build());
 
 
