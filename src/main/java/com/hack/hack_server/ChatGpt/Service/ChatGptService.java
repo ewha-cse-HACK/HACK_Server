@@ -140,13 +140,13 @@ public class ChatGptService {
         String petFur;
         String prompt;
         if (pet.getFurColor() == null){
-            prompt = "나는" + pet.getKind() + "종류의" + pet.getSpecies().getSpeciesName() + "야. 내 행동을 그려줘." + response;
+            prompt = "나는" + pet.getKind() + "종류의" + pet.getSpecies() + "야. 내 행동을 그려줘." + response;
 
         }
         else
         {
             petFur = pet.getFurColor();
-            prompt = "나는" + pet.getKind() + "종류의" + petFur + "털을 가진" + pet.getSpecies().getSpeciesName() + "야. 내 행동을 그려줘." + response;
+            prompt = "나는" + pet.getKind() + "종류의" + petFur + "털을 가진" + pet.getSpecies() + "야. 내 행동을 그려줘." + response;
 
         }
         return new DalleAnswerResponseDto(prompt, journalId);

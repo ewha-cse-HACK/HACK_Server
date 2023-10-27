@@ -19,19 +19,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PersonaService {
     private final PetRepository petRepository;
-    private final SpeciesRepository speciesRepository;
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
-        /*종 저장*/
-        Species species;
-        if (!speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
-            species = Species.builder()
-                    .speciesName(requestDto.getSpeciesName())
-                    .build();
-            speciesRepository.save(species);
-        }else
-            species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
+//        /*종 저장*/
+//        Species species;ㅎ
+//        if (!speciesRepository.existsBySpeciesName(requestDto.getSpeciesName())){
+//            species = Species.builder()
+//                    .speciesName(requestDto.getSpeciesName())
+//                    .build();
+//            speciesRepository.save(species);
+//        }else
+//            species = speciesRepository.findSpeciesBySpeciesName(requestDto.getSpeciesName());
 
         User user = principalDetails.getUser();
 
@@ -39,14 +38,13 @@ public class PersonaService {
         /*pet 객체 생성*/
         Pet pet = Pet.builder()
                 .user(user)
-                .species(species)
                 .requestDto(requestDto)
                 .build();
 
-        if (requestDto.getPetImage() == null)
-            pet.setPetProfile(species.getDefaultImage());
-        else
-            pet.setPetProfile(requestDto.getPetImage());
+//        if (requestDto.getPetImage() == null)
+//            pet.setPetProfile(species.getDefaultImage());
+//        else
+//            pet.setPetProfile(requestDto.getPetImage());
 
         petRepository.save(pet);
 
