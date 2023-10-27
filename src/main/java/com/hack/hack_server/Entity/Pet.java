@@ -48,9 +48,8 @@ public class Pet extends BaseTimeEntity{
     @JoinColumn(name = "owner_id", referencedColumnName = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "species_id", referencedColumnName = "species_id")
-    private Species species;
+    @Column(name = "species")
+    private String species;
 
     @Column(name = "passed_date")
     private Date passedDate;
@@ -69,9 +68,9 @@ public class Pet extends BaseTimeEntity{
 
 
     @Builder
-    public Pet(User user, Species species, PetRequestDto requestDto){
+    public Pet(User user, PetRequestDto requestDto){
         this.user = user;
-        this.species = species;
+        this.species = requestDto.getSpeciesName();
         this.name = requestDto.getName();
         this.ownerName = requestDto.getOwnerName();
         this.favoritePlace = requestDto.getFavoritePlace();
