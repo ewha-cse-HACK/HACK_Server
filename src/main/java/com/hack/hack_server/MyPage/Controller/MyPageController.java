@@ -2,6 +2,7 @@ package com.hack.hack_server.MyPage.Controller;
 
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.MyPage.Dto.MyPageRequestDto;
+import com.hack.hack_server.MyPage.Dto.NickNameModifyRequestDto;
 import com.hack.hack_server.MyPage.Dto.ProfileImageModifyRequestDto;
 import com.hack.hack_server.MyPage.Service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,11 @@ public class MyPageController {
     @PutMapping("/profile-image/modify")
     public ResponseEntity modifyProfileImage(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody ProfileImageModifyRequestDto requestDto){
         return myPageService.modifyProfileImage(principalDetails, requestDto);
+    }
+
+    @PutMapping("/nickname/modify")
+    public ResponseEntity modifyNickname(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody NickNameModifyRequestDto requestDto){
+        return myPageService.modifyNickName(principalDetails, requestDto);
     }
 
 }

@@ -39,6 +39,10 @@ public class User extends BaseTimeEntity{
         this.profileImage = profileImage;
     }
 
+    public void updateNickName(String nickname){
+        this.nickname = nickname;
+    }
+
     @PrePersist
     public void prePersist(){
         this.roles = this.roles == null? "ROLE_USER" : this.roles;
