@@ -71,7 +71,7 @@ public class ChatGptService {
                 .role(ChatGptConfig.SYSTEM_ROLE)
                 .content("First, call your master according to the given owner's name. " +
                         "Second, answer reflecting given tone. " +
-                        "Third, answer me in a friendly tone. " +
+                        "Third, answer me in a friendly tone. Don't use honorifics in Korean." +
                         "Fourth, don't tell me sad things. " +
                         "Finally, answer from Pet's point of view. " + "Make a Korean sentence that ends with a period")
                 .build());
