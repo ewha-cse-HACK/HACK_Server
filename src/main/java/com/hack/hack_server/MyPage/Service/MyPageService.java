@@ -3,6 +3,7 @@ package com.hack.hack_server.MyPage.Service;
 import com.hack.hack_server.Authentication.PrincipalDetails;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.MyPage.Dto.MyPageRequestDto;
+import com.hack.hack_server.MyPage.Dto.NickNameModifyRequestDto;
 import com.hack.hack_server.MyPage.Dto.ProfileImageModifyRequestDto;
 import com.hack.hack_server.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,15 @@ public class MyPageService {
         User user = principalDetails.getUser();
 
         user.updateProfile(requestDto.getProfileImage());
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Transactional
+    public ResponseEntity modifyNickName(PrincipalDetails principalDetails, NickNameModifyRequestDto requestDto){
+        User user = principalDetails.getUser();
+
+        user.updateNickName(requestDto.getNickname());
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
