@@ -1,0 +1,22 @@
+name: HACK server CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  SSH:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: ssh to ec2
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          script: |
+            cd /home/ec2-user/app/step1
+            sh deploy.sh
+            nohup java -jar hack_server-0.0.1-SNAPSHOT.jar > nohup.out 2> nohup.err < /dev/null &
