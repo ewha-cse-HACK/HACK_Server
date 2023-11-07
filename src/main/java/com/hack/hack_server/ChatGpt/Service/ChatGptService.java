@@ -113,6 +113,15 @@ public class ChatGptService {
                 .build());
         //이미지 생성시 종까지 명시하면 좋겠당
 
+        messages.add(MessageRequestDto.builder()
+                .role(ChatGptConfig.SYSTEM_ROLE)
+                .content("1.Your name: " + pet.getName() + "2. Owner's name: " + pet.getOwnerName())
+                .build());
+
+        messages.add(MessageRequestDto.builder()
+                .role(ChatGptConfig.SYSTEM_ROLE)
+                .content("Call your master according to the given owner's name.")
+                .build());
 
         ChatGptResponseDto responseDto =  this.getResponse(this.buildHttpEntity(new ChatGptRequestDto(
                 ChatGptConfig.MODEL,
