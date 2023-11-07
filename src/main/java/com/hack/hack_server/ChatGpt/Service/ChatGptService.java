@@ -120,7 +120,8 @@ public class ChatGptService {
 
         messages.add(MessageRequestDto.builder()
                 .role(ChatGptConfig.SYSTEM_ROLE)
-                .content("Call your master according to the given owner's name.")
+                .content("Call your master according to the given owner's name. " +
+                        "Answer me in a friendly tone. Don't use honorifics in Korean.")
                 .build());
 
         ChatGptResponseDto responseDto =  this.getResponse(this.buildHttpEntity(new ChatGptRequestDto(
