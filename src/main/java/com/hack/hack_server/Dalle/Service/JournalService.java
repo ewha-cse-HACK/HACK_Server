@@ -1,12 +1,9 @@
 package com.hack.hack_server.Dalle.Service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.hack.hack_server.Authentication.PrincipalDetails;
-import com.hack.hack_server.Community.Post.Dto.PostListResponseDto;
-import com.hack.hack_server.Community.Post.Dto.PostResponseDto;
 import com.hack.hack_server.Dalle.Dto.*;
 import com.hack.hack_server.Entity.JournalComment;
 import com.hack.hack_server.Entity.Journal;
-import com.hack.hack_server.Entity.Post;
 import com.hack.hack_server.Entity.User;
 import com.hack.hack_server.Repository.JournalCommentRepository;
 import com.hack.hack_server.Repository.JournalRepository;
@@ -18,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,14 +99,27 @@ public class JournalService {
         return HttpStatus.CREATED;
     }
 
-    //그림일기 목록 조회
+    //그림일기 목록 조회(월별 조회)
     @Transactional(readOnly = true)
-    public JournalListResponseDto findAllJournal(Long pet_id, Pageable pageable, PrincipalDetails principalDetails){
+    public JournalListResponseDto findJournalByMonth(Long pet_id, Long num, PrincipalDetails principalDetails){
+        User user = principalDetails.getUser();
+
+        List<Journal> journals = journalRepository.findByMonth(pet_id, num);
+        List<JournalListDto> journalListDtos = journals.stream().map(JournalListDto::new).collect(Collectors.toList());
+        JournalListResponseDto responseDto =  JournalListResponseDto.builder()
+                .journalList(journalListDtos)
+                .build();
+        return responseDto;
+    }
+
+    //그림일기 목록 조회(페이지네이션 적용)
+    @Transactional(readOnly = true)
+    public JournalListPageResponseDto findAllJournal(Long pet_id, Pageable pageable, PrincipalDetails principalDetails){
         User user = principalDetails.getUser();
 
         Page<Journal> journals = journalRepository.findAllByPet_Id(pageable, pet_id);
         Page<JournalListDto> journalListDtos = journals.map(JournalListDto::new);
-        JournalListResponseDto responseDto = JournalListResponseDto.builder()
+        JournalListPageResponseDto responseDto = JournalListPageResponseDto.builder()
                 .journalList(journalListDtos.getContent())
                 .currentPage(journalListDtos.getNumber() + 1)
                 .totalPage(journalListDtos.getTotalPages())

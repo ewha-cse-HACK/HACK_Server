@@ -9,6 +9,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Builder
-public class JournalListResponseDto {
+public class JournalListPageResponseDto {
     private List<JournalListDto> journalList;
+    private int totalPage;
+    private int currentPage;
 }
