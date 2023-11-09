@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("rainbow-letter")
+@RequestMapping()
 public class S3ImageController {
 
     private final S3Uploader s3Uploader;
