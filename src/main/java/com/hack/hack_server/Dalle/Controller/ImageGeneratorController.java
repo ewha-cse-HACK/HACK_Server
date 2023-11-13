@@ -92,6 +92,7 @@ public class ImageGeneratorController {
 
 
         int totalCnt = 1024;
+        System.out.println("====3333igcontroller");
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(totalCnt)) {
             int offset = 0;
             while (offset < image.length) {
@@ -116,7 +117,7 @@ public class ImageGeneratorController {
 
         } catch (IOException e) {
         }
-        System.out.println("===========");
+        System.out.println("여기까지 못 옴===========");
         return new ResponseEntity<>(jourId, HttpStatus.OK);
     }
 
