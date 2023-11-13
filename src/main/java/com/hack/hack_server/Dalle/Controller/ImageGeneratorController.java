@@ -116,7 +116,7 @@ public class ImageGeneratorController {
 
         } catch (IOException e) {
         }
-
+        System.out.println("===========");
         return new ResponseEntity<>(jourId, HttpStatus.OK);
     }
 
