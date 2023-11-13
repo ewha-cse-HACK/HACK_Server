@@ -133,6 +133,7 @@ public class ChatGptService {
         //max_token: 300
 
 
+        System.out.println("111===========");
         //* * * GPT가 생성한 일기 내용 저장 * * *
         /*일기 객체 생성*/
         Journal journal = Journal.builder()
