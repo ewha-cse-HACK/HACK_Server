@@ -107,7 +107,8 @@ public class ChatGptService {
         /*페르소나 반영*/
         messages.add(MessageRequestDto.builder()
                 .role(ChatGptConfig.SYSTEM_ROLE)
-                .content("You are a dead pet. You crossed the Rainbow Bridge, and you are living in a planet named '무지개별'. Please write 1 sentence of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal. Answer in a complete sentence." +
+                .content("You are a dead pet. You crossed the Rainbow Bridge, and you are living in a planet named '무지개별'. " +
+                        "Please write 1 sentence of journal of the day. Use informal language and use Korean. Use these characteristics when writing a journal. Answer in a complete sentence that ends with a period." +
                         "The tone of the journal: "+ pet.getCharacOne() + "하고" + pet.getCharacTwo() + "하게" +
                         "1. Your favorite place:" + pet.getFavoritePlace() + "2. Your favorite play:" + pet.getFavoritePlay() + "3. Your habit:" + pet.getHabit()
                         + "4. Your routine:" + pet.getRoutine() + "5. Your favorite snack:" + pet.getFavoriteSnack() + "6. Your favorite time:" + pet.getFavoriteTime())
