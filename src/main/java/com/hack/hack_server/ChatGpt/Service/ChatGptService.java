@@ -74,7 +74,7 @@ public class ChatGptService {
                         "Third, answer me in a friendly tone. Don't use honorifics in Korean." +
                         "Fourth, don't tell me sad things. " +
                         "Finally, answer from Pet's point of view. " + "Make a Korean sentence that ends with a period"
-                        + "Do not use personal pronoun, instead use the owner's name to call your owner: " + pet.getOwnerName())
+                        + "Do not use personal pronoun such as 'you', 'your', 'yours' in the sentence, instead use the owner's name to call your owner: " + pet.getOwnerName())
                 .build());
 
 
