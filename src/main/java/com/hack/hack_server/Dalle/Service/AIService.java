@@ -19,7 +19,7 @@ public class AIService {
                 .size("1024x1024")
                 .n(1)
                 .model("dall-e-3")
-                .style("natural")
+                .style("vivid")
                 .responseFormat("b64_json") //b64_json 포맷으로의 반환을 위해 이 코드 추가!
                 .build();
 
