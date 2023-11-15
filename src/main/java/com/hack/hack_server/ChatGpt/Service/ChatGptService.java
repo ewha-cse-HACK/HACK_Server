@@ -151,13 +151,13 @@ public class ChatGptService {
         String petFur;
         String prompt;
         if (pet.getFurColor() == null){
-            prompt = "나는" + pet.getKind() + "종류의" + pet.getSpecies() + "야. 내 행동을 그려줘." + response + "그림에는 텍스트를 넣지마.";
+            prompt = pet.getKind() + "종류의" + pet.getSpecies() + "를 디즈니 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
 
         }
         else
         {
             petFur = pet.getFurColor();
-            prompt = "나는" + pet.getKind() + "종류의" + petFur + "털을 가진" + pet.getSpecies() + "야. 내 행동을 그려줘." + response + "그림에는 텍스트를 넣지마.";
+            prompt = petFur + "털을 가진" + pet.getKind() + "종류의" + pet.getSpecies() + "를 디즈니 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
 
         }
         return new DalleAnswerResponseDto(prompt, journalId);
