@@ -151,7 +151,7 @@ public class ChatGptService {
         String petFur;
         String prompt;
         if (pet.getFurColor() == null){
-            prompt = pet.getKind() + "종류의" + pet.getSpecies() + "를 Disney 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
+            prompt = pet.getKind() + "종류의" + pet.getSpecies() + "를 Ghibli 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
 
         }
         else
