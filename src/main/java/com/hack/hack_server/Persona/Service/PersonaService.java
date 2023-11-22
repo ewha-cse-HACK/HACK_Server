@@ -83,8 +83,8 @@ public class PersonaService {
     public ResponseEntity deletePersona(Long pet_id){
         Pet pet = petRepository.findById(pet_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 반려동물 id가 없습니다: " + pet_id));
-        petRepository.delete(pet);
         journalRepository.deleteByPet_Id(pet_id);
+        petRepository.delete(pet);
         return new ResponseEntity(HttpStatus.OK);
     }
 
