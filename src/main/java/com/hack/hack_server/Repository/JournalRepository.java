@@ -33,5 +33,7 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM journal WHERE pet_id=:pet_id AND MONTH(DATE_FORMAT(created_time, '%Y-%m-%d')) = :num")
     List<Journal> findByMonth(@Param("pet_id") Long petId, @Param("num") Long num);
 
-    List<Journal> deleteByPet_Id(Long petId);
+    void deleteByPet_Id(Long petId);
+
+    List<Journal> findByPet_Id(Long petId);
 }

@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class PersonaService {
     private final PetRepository petRepository;
     private final JournalRepository journalRepository;
+    private final JournalCommentRepository journalCommentRepository;
 
     @Transactional
     public ResponseEntity savePetInfo(PrincipalDetails principalDetails, PetRequestDto requestDto){
@@ -83,7 +84,17 @@ public class PersonaService {
     public ResponseEntity deletePersona(Long pet_id){
         Pet pet = petRepository.findById(pet_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 반려동물 id가 없습니다: " + pet_id));
+
+        //해당 반려동물로 생성한 일기의 댓글 삭제
+        List<Journal> journalList = journalRepository.findByPet_Id(pet.getId());
+        for(Journal j : journalList){
+            journalCommentRepository.deleteByJournal_Id(j.getId());
+        }
+
+        //해당 반려동물의 일기 삭제
         journalRepository.deleteByPet_Id(pet_id);
+
+        //반려동물 페르소나 삭제
         petRepository.delete(pet);
         return new ResponseEntity(HttpStatus.OK);
     }

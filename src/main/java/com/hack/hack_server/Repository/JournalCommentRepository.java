@@ -16,4 +16,6 @@ public interface JournalCommentRepository extends JpaRepository<JournalComment, 
     @Query(nativeQuery = true, value = "select * from journal_comment where journal_id=:journal_id")
     Optional<JournalComment> findByJournal_Id(@Param("journal_id") Long journalId);
 
+    void deleteByJournal_Id(Long journalId);
+
 }
