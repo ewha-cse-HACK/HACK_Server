@@ -238,7 +238,7 @@ jobs:
 ![image](https://github.com/ewha-cse-HACK/HACK_Server/assets/67634926/99676a61-6f99-48af-8b07-4c52f4c09ec5)
 
 
-## 🖥️Demo video
+## 🖥️ Demo video
 [youtube] https://youtu.be/NFmeN01eHdY
 <br>
 <br>
