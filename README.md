@@ -1,89 +1,113 @@
-# 💥HACK💥
-### 🌈무지개편지
+# 🌈무지개편지
 펫로스 극복을 위한 챗봇 서비스
 
 저희 서비스 “무지개편지”의 목표는 펫로스 증후군을 앓는 사람들을 위해 챗봇이 주는 위로를 통해 극복의 토대를 제공하는 것입니다. 사용자들은 다른 사람에게 솔직히 말하기 어렵거나 시간이 많이 지나도 털어내지 못한 감정을 반려동물과의 가상 대화를 통해 부담 없이 털어놓을 수 있고, 이는 펫로스 증후군 극복에 긍정적인 작용을 할 수 있습니다. 시간이 흘러도 여전히 그리운, 당신의 가족이자 기억하고 싶은 이들에게 전하고 싶은 말을 모아 직접 보내보세요. “무지개편지”는 그 말들이 닿길 기원하며 가상의 답변을 보내드립니다.
 <br>
 <br>
+### 🌱Server 구성요소
+- java 17 : 사용한 프로그래밍 언어
+- springboot (3.1.1) : 프레임워크
+- JWT : 회원가입 및 로그인시 사용하는 토큰
+- Open AI (GPT-4, DALL-E) : 텍스트 생성을 위한 GPT 4, 이미지 생성을 위한 DALL-E 3 API 활용
+- EC2 : 서버
+- RDS : 데이터베이스
+- S3: 이미지 저장
 
-### ☝️How to use
-<h3>Install</h3>
+<br>
+
+### 🌟How to install
+1. AWS EC2 생성
+   
+<table>
+    <tr>
+        <td align=center>EC2 name</td>
+        <td align=center>hack_server</td>
+    </tr>
+    <tr>
+        <td align=center>AMI</td>
+        <td align=center>Amazon Linux 2023 AMI</td>
+    </tr>
+   <tr>
+        <td align=center>Instance Type</td>
+        <td align=center>t2 micro (free tier eligible)</td>
+    </tr>
+   <tr>
+        <td align=center>Key Pair</td>
+        <td align=center>Create new key pair</td>
+    </tr>
+   <tr>
+        <td align=center>VPC</td>
+        <td align=center>Default</td>
+    </tr>
+   <tr>
+        <td align=center>Subnet</td>
+        <td align=center>Default</td>
+    </tr>
+  <tr>
+        <td align=center>Auto-assign public IP</td>
+        <td align=center>Enable</td>
+    </tr>
+  <tr>
+        <td align=center>Security group</td>
+        <td align=center>SSH, HTTP, HTTPS, 8080</td>
+    </tr>
+</table>
+
+<br>
+2. RDS 설정
+<table>
+    <tr>
+        <td align=center>Create method</td>
+        <td align=center>Standard create</td>
+    </tr>
+    <tr>
+        <td align=center>Engine option</td>
+        <td align=center>MySQL Community</td>
+    </tr>
+   <tr>
+        <td align=center>Templates</td>
+        <td align=center>free tier</td>
+    </tr>
+   <tr>
+        <td align=center>DB instance identifier</td>
+        <td align=center>hack-db</td>
+    </tr>
+   <tr>
+        <td align=center>Computer Resource</td>
+        <td align=center>Don’t connect to an EC2 compute resource</td>
+    </tr>
+   <tr>
+        <td align=center>Public access </td>
+        <td align=center>Yes</td>
+    </tr>
+</table>
+
+<br>
+3. S3 설정
+<table>
+    <tr>
+        <td align=center>Bucket name</td>
+        <td align=center>hack-s3bucket</td>
+    </tr>
+    <tr>
+        <td align=center>ACLs</td>
+        <td align=center>enable</td>
+    </tr>
+   <tr>
+        <td align=center>Block Public Access</td>
+        <td align=center>disable</td>
+    </tr>
+</table>
+
+<br>
 
 ~~~
 git clone https://github.com/ewha-cse-HACK/HACK_Server.git
 ~~~
 
-<h3>API</h3>
-<table>
-  <thead>
-    <tr>
-        <th align=center>기능</td>
-        <th align=center>Method</td>
-        <th align=center>URL</td>
-        <th align=center>Request Body</td>
-    </tr>
-  </thead>
-    <tr>
-        <td align=center>글 작성</td>
-        <td align=center>POST</td>
-        <td align=center>/posts/</td>
-        <td align=center>{
-          "title": string,
-          "content": string,
-          "author": string
-          }</td>
-    </tr>
-    <tr>
-        <td align=center>글 수정</td>
-        <td align=center>PATCH</td>
-        <td align=center>/posts/{id}</td>
-        <td align=center>{
-                "title": string,
-                "content": string,
-                "author": string
-                }</td>
-    </tr>
-    <tr>
-        <td align=center>글 삭제</td>
-        <td align=center>DELETE</td>
-        <td align=center>/posts/{id}</td>
-        <td align=center></td>
-    </tr>
-    <tr>
-        <td align=center>특정 글 불러오기</td>
-        <td align=center>GET</td>
-        <td align=center>/posts/{id}</td>
-        <td align=center></td>
-    </tr>
-    <tr>
-        <td align=center>전체 글 불러오기</td>
-        <td align=center>GET</td>
-        <td align=center>/posts/</td>
-        <td align=center></td>
-    </tr>
-    <tr>
-        <td align=center>좋아요</td>
-        <td align=center>GET</td>
-        <td align=center>/posts/{id}/dolike</td>
-        <td align=center></td>
-    </tr>
-    <tr>
-        <td align=center>좋아요 취소</td>
-        <td align=center>GET</td>
-        <td align=center>/posts/{id}/undolike</td>
-        <td align=center></td>
-    </tr>
-    <tr>
-        <td align=center>댓글 작성</td>
-        <td align=center>POST</td>
-        <td align=center>/posts/{id}/comment</td>
-        <td align=center>{
-”comment”: string
-}</td>
-    </tr>
-    
-</table>
-<br>
+
+ 
+
 
 
 <img src = "https://github.com/ewha-cse-HACK/server_dev/assets/67634926/4ab5ee50-fc68-4f65-9fcd-7cd9c11aab10" width = 400 height = 300>
