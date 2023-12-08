@@ -232,6 +232,7 @@ jobs:
     [API 명세서](https://sour-actress-dea.notion.site/API-9cae104034e5467fbb01377553c0cd4c?pvs=4)
  
 <br>
+
 ## 🛠️Project Architecture
 ![image](https://github.com/ewha-cse-HACK/HACK_Server/assets/67634926/99676a61-6f99-48af-8b07-4c52f4c09ec5)
 
