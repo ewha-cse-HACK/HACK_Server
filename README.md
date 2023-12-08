@@ -128,8 +128,8 @@ git --version //설치된 git 버전 확인</code></pre>
 
 <br>
 8. MySQL 설치
-<pre><code>sudo yum localinstall https://dev.mysql.com/get/mysql80-community-release-el9-3.noarch.rpm
-# [제일 최신 버전으로 설치]
+    <pre><code>sudo yum localinstall https://dev.mysql.com/get/mysql80-community-release-el9-3.noarch.rpm
+    # [제일 최신 버전으로 설치]
 sudo yum install mysql-community-server
 sudo systemctl start mysqld
 sudo systemctl status mysqld</code></pre>
@@ -170,27 +170,26 @@ echo "> JAR Name: $JAR_NAME"
 nohup java -jar $JAR_NAME &
 ~~~
 <br>
-11. github action을 이용한 자동 배포
-   <br>
-   a. Github Repository의 Settings > Secrets and variables > Actions에 “Repository secrets" 3가지 추가  <br>
-      <tab>1) HOST = EC2 인스턴스의 public IP </tab> <br>
-      2)USER = 사용자 (보통은 ec2-user)  <br>
-      3) SSH_PRIVATE_KEY = `.pem` 키 파일 내용 <br>
-   b. github/workflows 폴더 생성 후 main.yml 파일 아래와 같이 추가
-   <br>
-   
-   ```
-      name: WORKFLOW_NAME # workflow 이름 설정
+11. github action을 이용한 자동 배포 <br>
+        a. Github Repository의 Settings > Secrets and variables > Actions에 “Repository secrets" 3가지 추가 <br>
+                    - HOST = EC2 인스턴스의 public IP <br>
+                    - USER = 사용자 (보통은 ec2-user)  <br>
+                    - SSH_PRIVATE_KEY = `.pem` 키 파일 내용 <br>
+                <br>
+       b. github/workflows 폴더 생성 후 main.yml 파일 아래와 같이 추가 <br>
 
-      # workflow를 run하는 조건 설정
-   on:
-     push:
-       branches: [ main ]  #설정한 workflow run 조건: branch [main]에 push를 할때마다
+   <pre><code>
+name: WORKFLOW_NAME # workflow 이름 설정
 
-      # workflow가 run할때 실행하는 내용 정의
-      jobs:
-        SSH:
-          runs-on: ubuntu-latest # OS(workflow label)
+# workflow를 run하는 조건 설정
+on:
+    push:
+        branches: [ main ]  #설정한 workflow run 조건: branch [main]에 push를 할때마다
+
+# workflow가 run할때 실행하는 내용 정의
+jobs:
+    SSH:
+        runs-on: ubuntu-latest # OS(workflow label)
 
        steps:
          - uses: actions/checkout@v3 #Repository 참고
@@ -206,7 +205,7 @@ nohup java -jar $JAR_NAME &
             
                #기존 deploy.sh 파일에서 nohup 명령어를 포함한 line을 지우고, 아래와 같이 `.yml` 스크립트 파일에 추가
                nohup java -jar wow_server-0.0.1-SNAPSHOT.jar > nohup.out 2> nohup.err < /dev/null &
-   ```
+   </code></pre>
    <br>
     
    c. 기존 deploy.sh 파일에서 nohup 부분 주석 처리
