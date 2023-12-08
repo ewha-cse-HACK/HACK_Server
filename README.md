@@ -9,20 +9,8 @@
 <br>
 <br>
 
-## 🛠️Project Architecture
+## 🖼️ Project Architecture
 ![image](https://github.com/ewha-cse-HACK/HACK_Server/assets/67634926/99676a61-6f99-48af-8b07-4c52f4c09ec5)
-
-
-## 🌱 Server 구성요소
-- java 17 : 사용한 프로그래밍 언어
-- springboot (3.1.1) : 프레임워크
-- JWT : 회원가입 및 로그인시 사용하는 토큰
-- Open AI (GPT-4, DALL-E) : 텍스트 생성을 위한 GPT 4, 이미지 생성을 위한 DALL-E 3 API 활용
-- EC2 : 서버
-- RDS : 데이터베이스
-- S3: 이미지 저장
-
-<br>
 
 
 ## 💪 Teck stack
@@ -35,6 +23,17 @@
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white">
 
+
+## 🌱 Server 구성요소
+- java 17 : 사용한 프로그래밍 언어
+- springboot (3.1.1) : 프레임워크
+- JWT : 회원가입 및 로그인시 사용하는 토큰
+- Open AI (GPT-4, DALL-E) : 텍스트 생성을 위한 GPT 4, 이미지 생성을 위한 DALL-E 3 API 활용
+- EC2 : 서버
+- RDS : 데이터베이스
+- S3: 이미지 저장
+
+<br>
 
 
 ## 🧩 사용한 오픈소스
