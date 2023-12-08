@@ -270,6 +270,137 @@ jobs:
 <br>
 
 
+## 🌳Source Code tree
+~~~
+├── settings.gradle
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── hack
+    │   │           └── hack_server
+    │   │               ├── Authentication
+    │   │               │   ├── Controller
+    │   │               │   │   └── UserController.java
+    │   │               │   ├── Dto
+    │   │               │   │   ├── JoinRequestDto.java
+    │   │               │   │   └── LoginRequestDto.java
+    │   │               │   ├── JwtAuthenticationFilter.java
+    │   │               │   ├── JwtAuthorizationFilter.java
+    │   │               │   ├── JwtProvider.java
+    │   │               │   ├── PrincipalDetails.java
+    │   │               │   └── Service
+    │   │               │       ├── PrincipalDetailsService.java
+    │   │               │       └── UserService.java
+    │   │               ├── ChatGpt
+    │   │               │   ├── ChatGptConfig.java
+    │   │               │   ├── Controller
+    │   │               │   │   └── ChatGptController.java
+    │   │               │   ├── Dto
+    │   │               │   │   ├── ChatGptAnswerResponseDto.java
+    │   │               │   │   ├── ChatGptRequestDto.java
+    │   │               │   │   ├── ChatGptResponseDto.java
+    │   │               │   │   ├── Choice.java
+    │   │               │   │   ├── DalleAnswerResponseDto.java
+    │   │               │   │   ├── MessageRequestDto.java
+    │   │               │   │   ├── MessageResponseDto.java
+    │   │               │   │   └── QuestionRequestDto.java
+    │   │               │   └── Service
+    │   │               │       └── ChatGptService.java
+    │   │               ├── Community
+    │   │               │   ├── Comment
+    │   │               │   │   ├── Controller
+    │   │               │   │   │   └── CommentController.java
+    │   │               │   │   ├── Dto
+    │   │               │   │   │   ├── CommentSaveRequestDto.java
+    │   │               │   │   │   └── CommentUpdateRequestDto.java
+    │   │               │   │   └── Service
+    │   │               │   │       └── CommentService.java
+    │   │               │   └── Post
+    │   │               │       ├── Controller
+    │   │               │       │   └── PostController.java
+    │   │               │       ├── Dto
+    │   │               │       │   ├── CommentDto.java
+    │   │               │       │   ├── PostAddRequestDto.java
+    │   │               │       │   ├── PostDetailResponseDto.java
+    │   │               │       │   ├── PostImageDto.java
+    │   │               │       │   ├── PostListResponseDto.java
+    │   │               │       │   ├── PostModifyRequestDto.java
+    │   │               │       │   └── PostResponseDto.java
+    │   │               │       └── Service
+    │   │               │           └── PostService.java
+    │   │               ├── Dalle
+    │   │               │   ├── Controller
+    │   │               │   │   └── ImageGeneratorController.java
+    │   │               │   ├── Dto
+    │   │               │   │   ├── JournalCommentDto.java
+    │   │               │   │   ├── JournalCommentResponseDto.java
+    │   │               │   │   ├── JournalListDto.java
+    │   │               │   │   ├── JournalListPageResponseDto.java
+    │   │               │   │   ├── JournalListResponseDto.java
+    │   │               │   │   └── JournalResponseDto.java
+    │   │               │   ├── Service
+    │   │               │   │   ├── AIService.java
+    │   │               │   │   └── JournalService.java
+    │   │               │   └── ServicesConfig.java
+    │   │               ├── Entity
+    │   │               │   ├── BaseTimeEntity.java
+    │   │               │   ├── Comment.java
+    │   │               │   ├── Heart.java
+    │   │               │   ├── Journal.java
+    │   │               │   ├── JournalComment.java
+    │   │               │   ├── Pet.java
+    │   │               │   ├── Post.java
+    │   │               │   ├── PostImage.java
+    │   │               │   └── User.java
+    │   │               ├── Global
+    │   │               │   ├── Config
+    │   │               │   │   ├── JpaConfig.java
+    │   │               │   │   └── SecurityConfig.java
+    │   │               │   └── S3
+    │   │               │       ├── S3Config.java
+    │   │               │       ├── S3ImageController.java
+    │   │               │       └── S3Uploader.java
+    │   │               ├── HackServerApplication.java
+    │   │               ├── MyPage
+    │   │               │   ├── Controller
+    │   │               │   │   └── MyPageController.java
+    │   │               │   ├── Dto
+    │   │               │   │   ├── MyPageRequestDto.java
+    │   │               │   │   ├── NickNameModifyRequestDto.java
+    │   │               │   │   └── ProfileImageModifyRequestDto.java
+    │   │               │   └── Service
+    │   │               │       └── MyPageService.java
+    │   │               ├── Papago
+    │   │               │   ├── NaverTransService.java
+    │   │               │   └── PapagoController.java
+    │   │               ├── Persona
+    │   │               │   ├── Controller
+    │   │               │   │   └── PersonaController.java
+    │   │               │   ├── Dto
+    │   │               │   │   ├── PersonaDto.java
+    │   │               │   │   ├── PersonaListRequestDto.java
+    │   │               │   │   ├── PetRequestDto.java
+    │   │               │   │   └── SpeciesRequestDto.java
+    │   │               │   └── Service
+    │   │               │       └── PersonaService.java
+    │   │               └── Repository
+    │   │                   ├── CommentRepository.java
+    │   │                   ├── HeartRepository.java
+    │   │                   ├── JournalCommentRepository.java
+    │   │                   ├── JournalRepository.java
+    │   │                   ├── PetRepository.java
+    │   │                   ├── PostImageRepository.java
+    │   │                   ├── PostRepository.java
+    │   │                   └── UserRepository.java
+    │   └── resources
+    │       ├── application.properties
+    │       ├── static
+    │       └── templates
+~~~
+
+
+
 ## 👍 Developers
 <table>
   <thead>
