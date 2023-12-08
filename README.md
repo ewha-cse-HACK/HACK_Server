@@ -50,6 +50,7 @@ implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 <pre><code>implementation 'io.jsonwebtoken:jjwt-api:0.11.5’</code></pre>
 
 <br>
+
 ## 🌟 How to install
 1. AWS EC2 생성
 <table>
