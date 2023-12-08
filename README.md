@@ -215,7 +215,7 @@ jobs:
      <br>
       
     
-## 🌤️ how to build
+## 🌤️ How to build
 1. git clone https://github.com/ewha-cse-HACK/HACK_Server.git
 2. [application.properties](http://application.properties) 파일 설정 <br>
     a. openAI api key <br>
@@ -226,7 +226,7 @@ jobs:
 5. postman 혹은 chrome에서 <code>https://api.rainbow-letter.com/{테스트할_URL} </code>을 통해 API 조회
 <br>
 
-## 🎮 how to test
+## 🎮 How to test
 1. postman에서 [http://localhost:8080/](http://localhost:8080/community/1){테스트하고_싶은_api} 를 통해 API 조회
 2. postman 혹은 chrome에서 [https://api.rainbow-letter.com/](https://api.rainbow-letter.com/community?page=1){테스트할_URL}을 통해 API 조회
 
@@ -246,7 +246,6 @@ jobs:
 ## 🧩 사용한 오픈소스
 1. Open AI DALL-E
 <pre><code>implementation 'com.theokanning.openai-gpt3-java:client:0.17.0'
-
 implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 
 참고
@@ -258,16 +257,6 @@ implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 
 
 ## 💪 Teck stack
-<b>Client</b> <br>
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"/></a>
-<br>
-<br>
-
 <b>Server</b> <br>
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
