@@ -271,6 +271,7 @@ jobs:
 
 
 ## 🌳 Source Code tree
+
 ~~~
 ├── settings.gradle
 └── src
@@ -398,6 +399,14 @@ jobs:
     │       ├── static
     │       └── templates
 ~~~
+
+- Authentication: 로그인/회원가입 <br>
+- ChatGpt: 채팅 <br>
+- Community: 커뮤니티 <br>
+- Dalle: 일기 훔쳐보기 <br>
+- MyPage: 마이페이지 <br>
+- Papago: Papago API 호출 <br>
+- Persona: 페르소나 생성 <br>
 
 
 
