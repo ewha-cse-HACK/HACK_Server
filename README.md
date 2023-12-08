@@ -231,7 +231,7 @@ jobs:
 
     [API 명세서](https://sour-actress-dea.notion.site/API-9cae104034e5467fbb01377553c0cd4c?pvs=4)
  
-
+<br>
 ## 🛠️Project Architecture
 ![image](https://github.com/ewha-cse-HACK/HACK_Server/assets/67634926/99676a61-6f99-48af-8b07-4c52f4c09ec5)
 
@@ -249,22 +249,23 @@ implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 
 참고
 [https://velog.io/@minji1289/Springboot-스프링부트로-DALL-E-API-호출하기](https://velog.io/@minji1289/Springboot-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%EB%A1%9C-DALL-E-API-%ED%98%B8%EC%B6%9C%ED%95%98%EA%B8%B0)
-
+<br>
 2. 로그인 JWT
 <pre><code>implementation 'io.jsonwebtoken:jjwt-api:0.11.5’</code></pre>
 
 
 ## 💪Teck stack
-backend <br>
+Client <br>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"/></a>
+<br>
+<br>
+
+Server <br>
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/spring_boot-6DB33F?style=for-the-badge&logo=spring_boot&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> <img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 
-frontend <br>
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"/></a>
-<br>
-<br>
 
-
-### 👍Developers
+## 👍Developers
 <table>
   <thead>
     <tr>
