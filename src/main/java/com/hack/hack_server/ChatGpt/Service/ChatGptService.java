@@ -99,7 +99,6 @@ public class ChatGptService {
     // main 기능 #2: 일기 훔쳐보기 -> 일기(chatGPT 생성)
     public DalleAnswerResponseDto generateJournal(Long petId, PrincipalDetails principalDetails){
         User user = principalDetails.getUser();
-        System.out.println("----1111");
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(()-> new IllegalArgumentException("pet_id 오류: " + petId));
 
