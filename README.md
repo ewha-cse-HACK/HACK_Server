@@ -1,10 +1,10 @@
-# 🌈무지개편지
+# 🌈 무지개편지
 <b>펫로스 극복을 위한 챗봇 서비스</b>
 
 저희 서비스 “무지개편지”의 목표는 펫로스 증후군을 앓는 사람들을 위해 챗봇이 주는 위로를 통해 극복의 토대를 제공하는 것입니다. 사용자들은 다른 사람에게 솔직히 말하기 어렵거나 시간이 많이 지나도 털어내지 못한 감정을 반려동물과의 가상 대화를 통해 부담 없이 털어놓을 수 있고, 이는 펫로스 증후군 극복에 긍정적인 작용을 할 수 있습니다. 시간이 흘러도 여전히 그리운, 당신의 가족이자 기억하고 싶은 이들에게 전하고 싶은 말을 모아 직접 보내보세요. “무지개 편지”는 그 말들이 닿길 기원하며 가상의 답변을 보내드립니다.
 <br>
 <br>
-## 🌱Server 구성요소
+## 🌱 Server 구성요소
 - java 17 : 사용한 프로그래밍 언어
 - springboot (3.1.1) : 프레임워크
 - JWT : 회원가입 및 로그인시 사용하는 토큰
@@ -15,7 +15,7 @@
 
 <br>
 
-## 🌟How to install
+## 🌟 How to install
 1. AWS EC2 생성
 <table>
     <tr>
@@ -102,6 +102,7 @@
 4. 도메인 설정
     <br>
    aws route53에서 도메인 구매 후 api.rainbow-letter.com과 rainbow-letter.com 등록
+<br>
 <br>
 <br>
 5. EC2 서버에 ssh 접속
@@ -214,18 +215,18 @@ jobs:
      <br>
       
     
-## 🌤️how to build
+## 🌤️ how to build
 1. git clone https://github.com/ewha-cse-HACK/HACK_Server.git
-2. [application.properties](http://application.properties) 파일 설정
-    a. openAI api key
-    b. rds 혹은 local db 엔드포인트 및 패스워드
-    c. papago api key
+2. [application.properties](http://application.properties) 파일 설정 <br>
+    a. openAI api key <br>
+    b. rds 혹은 local db 엔드포인트 및 패스워드 <br>
+    c. papago api key <br>
 3. 어플리케이션 실행
 4. postman에서 <code>http://localhost:8080/{테스트할_URL}</code> 을 통해 API 조회
 5. postman 혹은 chrome에서 <code>https://api.rainbow-letter.com/{테스트할_URL} </code>을 통해 API 조회
 <br>
 
-## 🎮how to test
+## 🎮 how to test
 1. postman에서 [http://localhost:8080/](http://localhost:8080/community/1){테스트하고_싶은_api} 를 통해 API 조회
 2. postman 혹은 chrome에서 [https://api.rainbow-letter.com/](https://api.rainbow-letter.com/community?page=1){테스트할_URL}을 통해 API 조회
 
@@ -242,7 +243,7 @@ jobs:
 <br>
 <br>
 
-## 🧩사용한 오픈소스
+## 🧩 사용한 오픈소스
 1. Open AI DALL-E
 <pre><code>implementation 'com.theokanning.openai-gpt3-java:client:0.17.0'
 
@@ -251,11 +252,12 @@ implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 참고
 [https://velog.io/@minji1289/Springboot-스프링부트로-DALL-E-API-호출하기](https://velog.io/@minji1289/Springboot-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%EB%A1%9C-DALL-E-API-%ED%98%B8%EC%B6%9C%ED%95%98%EA%B8%B0)
 <br>
+<br>
 2. 로그인 JWT
 <pre><code>implementation 'io.jsonwebtoken:jjwt-api:0.11.5’</code></pre>
 
 
-## 💪Teck stack
+## 💪 Teck stack
 <b>Client</b> <br>
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/></a> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/></a>
@@ -276,9 +278,9 @@ implementation 'com.theokanning.openai-gpt3-java:service:0.17.0'</code></pre>
 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white">
 
 
+<br>
 
-
-## 👍Developers
+## 👍 Developers
 <table>
   <thead>
     <tr>
