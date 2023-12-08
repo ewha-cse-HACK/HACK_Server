@@ -262,10 +262,11 @@ jobs:
 <br>
 
 ## 🎮 How to test
+[API 명세서](https://sour-actress-dea.notion.site/API-9cae104034e5467fbb01377553c0cd4c?pvs=4)
+<br>
 1. postman에서 [http://localhost:8080/](http://localhost:8080/community/1){테스트하고_싶은_api} 를 통해 API 조회
 2. postman 혹은 chrome에서 [https://api.rainbow-letter.com/](https://api.rainbow-letter.com/community?page=1){테스트할_URL}을 통해 API 조회
 
-    [API 명세서](https://sour-actress-dea.notion.site/API-9cae104034e5467fbb01377553c0cd4c?pvs=4)
  
 <br>
 
