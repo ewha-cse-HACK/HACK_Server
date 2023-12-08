@@ -105,14 +105,14 @@ public class ChatGptService {
         List<MessageRequestDto> messages = new ArrayList<>();
 
         /*페르소나 반영*/
-//        messages.add(MessageRequestDto.builder()
-//                .role(ChatGptConfig.SYSTEM_ROLE)
-//                .content("You are a dead pet. You crossed the Rainbow Bridge, and you are living in a planet named '무지개별'. " +
-//                        "Please write a single sentence of short journal of the day. Use informal language and use Korean. Use some of these characteristics when writing a journal. Remember your sentence should be short and clear. Answer in a complete sentence that ends with a period." +
-//                        "The tone of the journal: "+ pet.getCharacOne() + "하고" + pet.getCharacTwo() + "하게" +
-//                        "1. Your favorite place:" + pet.getFavoritePlace() + "2. Your favorite play:" + pet.getFavoritePlay() + "3. Your habit:" + pet.getHabit()
-//                        + "4. Your routine:" + pet.getRoutine() + "5. Your favorite snack:" + pet.getFavoriteSnack() + "6. Your favorite time:" + pet.getFavoriteTime())
-//                .build());
+        messages.add(MessageRequestDto.builder()
+                .role(ChatGptConfig.SYSTEM_ROLE)
+                .content("You are a pet. You crossed the Rainbow Bridge, and you are living in a planet named '무지개별'. " +
+                        "Please write a single sentence of short journal of the day. Use informal language and use Korean. Use some of these characteristics when writing a journal. Remember your sentence should be short and clear. Answer in a complete sentence that ends with a period." +
+                        "The tone of the journal: "+ pet.getCharacOne() + "하고" + pet.getCharacTwo() + "하게" +
+                        "1. Your favorite place:" + pet.getFavoritePlace() + "2. Your favorite play:" + pet.getFavoritePlay() + "3. Your habit:" + pet.getHabit()
+                        + "4. Your routine:" + pet.getRoutine() + "5. Your favorite snack:" + pet.getFavoriteSnack() + "6. Your favorite time:" + pet.getFavoriteTime())
+                .build());
         //이미지 생성시 종까지 명시하면 좋겠당
 
         messages.add(MessageRequestDto.builder()
@@ -123,7 +123,7 @@ public class ChatGptService {
         messages.add(MessageRequestDto.builder()
                 .role(ChatGptConfig.SYSTEM_ROLE)
                 .content("Call your master according to the given owner's name. " +
-                        "Answer me in a friendly tone. Don't use honorifics in Korean.")
+                        "Answer me in a friendly tone.")
                 .build());
 
         ChatGptResponseDto responseDto =  this.getResponse(this.buildHttpEntity(new ChatGptRequestDto(
@@ -151,13 +151,13 @@ public class ChatGptService {
         String petFur;
         String prompt;
         if (pet.getFurColor() == null){
-            prompt = pet.getKind() + "종류의" + pet.getSpecies() + "를 그려줘."; //+ response + "그림에는 텍스트를 넣지마.";
+            prompt = pet.getKind() + "종류의" + pet.getSpecies() + "를 Ghibli 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
 
         }
         else
         {
             petFur = pet.getFurColor();
-            prompt = petFur + "털을 가진" + pet.getKind() + "종류의" + pet.getSpecies() + "를 그려줘."; //+ response + "그림에는 텍스트를 넣지마.";
+            prompt = petFur + "털을 가진" + pet.getKind() + "종류의" + pet.getSpecies() + "를 Ghibli 스타일로 그려줘." + response + "그림에는 텍스트를 넣지마.";
 
         }
         return new DalleAnswerResponseDto(prompt, journalId);
